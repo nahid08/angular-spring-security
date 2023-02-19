@@ -55,7 +55,7 @@ public class JwtUtils {
     public boolean validateJwtToken(String authToken) {
         try {
             logger.info("Validate Jwt Token in the method - validateJwtToken");
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJwt(authToken);
+            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;
         } catch(Exception e) {
             return false;
@@ -64,7 +64,7 @@ public class JwtUtils {
 
     public String getUserNameFromJwtToken(String token) {
         logger.info("Get UserName from JWT Token");
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJwt(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
    public String generateTokenFromUsername(String username) {
