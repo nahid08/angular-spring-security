@@ -1,4 +1,4 @@
-import  { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http'
+import  { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { Observable } from 'rxjs';
 
 
@@ -14,6 +14,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         return next.handle(req);
     }
 
-    
-
 }
+
+export const httpInterceptorsProviders = [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true}
+]
