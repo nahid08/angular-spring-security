@@ -1,2 +1,21 @@
 
-<input >
+<div>
+    <div>
+        <label>Username</label>
+        <input type="text"  [(ngModel)]="username">
+    </div>
+
+    <div>
+        <label>Password</label>
+        <input type="password" [(ngModel)]="password">
+    </div>
+
+    <div>
+        <label>Email</label>
+        <input type="email" [(ngModel)]="email">
+    </div>
+
+    <div>
+        <button (click)="onSubmit()">Submit</button>
+    </div>
+</div>

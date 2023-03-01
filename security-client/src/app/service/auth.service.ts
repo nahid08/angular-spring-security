@@ -8,7 +8,7 @@ const AUTH_API = "http://localhost:9000/api/auth/";
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': 'http://localhost:9000',
-    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Credentials': "true",
     'Access-Control-Allow-Headers': 'Content-Type',
     }),
 }
