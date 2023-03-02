@@ -1,14 +1,14 @@
-<div>
-    <div>
-   <label>Name</label>
-    <input type="text" [(ngModel)]="username">
+<div class="container" style="padding-top: 100px;">
+    <div class="row" style="padding-bottom: 20px;">
+   <label class="col-sm-1">Name</label>
+    <input type="text" class="col-sm-8" [(ngModel)]="username">
     </div>
     
-    <div>
-        <label>Password</label>
-        <input type="password" [(ngModel)]="password">
+    <div class="row" style="padding:1px;">
+        <label class="col-sm-1">Password</label>
+        <input class="col-sm-8" type="password" [(ngModel)]="password">
     </div>
-    <div>
-        <button (click)="onSubmit()">Submit</button>
+    <div style="padding-top: 20px; text-align: center; padding-right: 50px;">
+        <button (click)="onSubmit()" >Submit</button>
     </div>
 </div>
