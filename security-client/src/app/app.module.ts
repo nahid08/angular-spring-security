@@ -10,6 +10,7 @@ import { httpInterceptorsProviders } from './utils/http.interceptor';
 import { BoardAdminModule } from './board-admin/board-admin.module';
 import { HomeModule } from './home/home.module';
 import { RegistrationModule } from './registration/registration.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { RegistrationModule } from './registration/registration.module';
     FormsModule,
     BoardAdminModule,
     HomeModule,
-    RegistrationModule
+    RegistrationModule,
+    BrowserAnimationsModule
 
   ],
   providers: [httpInterceptorsProviders],

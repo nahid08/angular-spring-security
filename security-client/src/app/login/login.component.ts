@@ -28,6 +28,9 @@ export class LoginComponent implements OnInit {
    }
 
    onSubmit(): void {
+
+      
+
       this.authService.login(this.username, this.password).subscribe({
         next: data => {
             this.storageService.saveUser(data);
@@ -40,6 +43,7 @@ export class LoginComponent implements OnInit {
         error: err => {
             this.errorMessage = err.message;
             this.isLoginFailed = true;
+            alert(this.errorMessage)
         }
       })
    }

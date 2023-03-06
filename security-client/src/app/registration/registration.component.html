@@ -1,21 +1,53 @@
 
-<div>
-    <div>
-        <label>Username</label>
-        <input type="text"  [(ngModel)]="username">
+<div >
+    <div class="row">
+    
+            <div class="col-sm-1">
+                <label>Username</label>
+            </div>
+            <div class="col-sm-11"> 
+                <input type="text"  [(ngModel)]="username">
+            </div>
+     
     </div>
 
-    <div>
-        <label>Password</label>
-        <input type="password" [(ngModel)]="password">
+    <div class="row">
+        <div class="col-sm-1">
+            <label>Password</label>
+        </div>
+        <div class="col-sm-11">
+            <input type="password" [(ngModel)]="password">
+        </div>
     </div>
 
-    <div>
-        <label>Email</label>
-        <input type="email" [(ngModel)]="email">
+
+    <div class="row">
+        <div class="col-sm-1">
+            <label>Email</label>
+        </div>
+        <div class="col-sm-11">
+            <input type="email" [(ngModel)]="email">
+        </div>
     </div>
 
-    <div>
-        <button (click)="onSubmit()">Submit</button>
+    <div class="row" style="padding-top: 30pt; min-height: 100pt;">
+        <div class="col-sm-12">
+            <mat-form-field  appearance="fill">
+                <mat-label>Select Role</mat-label>
+                <mat-select [multiple]="true" [required]="true" [value]="role" >
+                    <mat-option *ngFor="let value of roles" [value]="value">{{value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <button (click)="onSubmit()">Submit</button>
+        </div>
+    </div>
+
+    
+
+
 </div>
