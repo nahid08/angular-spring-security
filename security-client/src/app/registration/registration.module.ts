@@ -9,7 +9,7 @@ import {MatSelectModule} from '@angular/material/select';
     imports: [
         FormsModule,
         CommonModule,
-        MatSelectModule
+        MatSelectModule,
     ],
     declarations: [
         RegistrationComponent
