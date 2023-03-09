@@ -43,7 +43,7 @@
         <div class="col-sm-12" style="text-align: left;">
             <mat-form-field  appearance="fill">
                 <mat-label>Select Role</mat-label>
-                <mat-select [multiple]="true" [required]="true" [value]="role" >
+                <mat-select [multiple]="true" [required]="true" [(ngModel)]="role" >
                     <mat-option *ngFor="let value of roles" [value]="value">{{value}}</mat-option>
                 </mat-select>
             </mat-form-field>

@@ -17,7 +17,7 @@ export class RegistrationComponent implements OnInit {
   isSignUpFailed: boolean = false;
   errorMessage: string = "";
   roles :string[] = ["admin", "mod"];
-  role?: string;
+  role: string[] = ["mod"];
 
 
   constructor(private authService: AuthService, private storageService: StorageService, private router: Router) {};
@@ -31,7 +31,7 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit(): void {
 
-    this.authService.register(this.username, this.email, this.password, this.roles).subscribe({
+    this.authService.register(this.username, this.email, this.password, this.role).subscribe({
       next: data => {
         console.log(data);
         this.isSuccessful = true;

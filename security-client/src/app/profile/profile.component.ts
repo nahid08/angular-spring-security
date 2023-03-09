@@ -16,13 +16,9 @@ export class ProfileComponent implements OnInit {
   
   ngOnInit(): void {
       this.currentUser = this.storageService.getUser();
+     
   }
 
-  checkIfUserIsLoggedIn(): void {
-    if(!this.storageService.isLoggedIn()) {
-      this.router.navigate(['/login']);
-    }
-  }
 
   doLogOut(): void {
     this.authService.logout().subscribe({
