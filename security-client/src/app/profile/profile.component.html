@@ -6,6 +6,24 @@
     </div>
 
     <div class="row">
+        <div class="col">
+            <img class="img-fluid rounded">
+        </div>
+    </div>
+
+    <div class="row pt-3">
+        <div class="col text-center">
+            <input type="file" (change)="fileUpload($event)">
+        </div>
+    </div>
+
+    <div class="row pt-3">
+        <div class="col text-center">
+            <button class="btn-primary" (click)="doUpload()">Upload</button>
+        </div>
+    </div>
+
+    <div class="row pt-5">
         <div class="col text-center">
             <button  (click)="doLogOut()">Log Out</button>
         </div>

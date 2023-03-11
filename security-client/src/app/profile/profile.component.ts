@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { FileService } from '../service/file.service';
 import { StorageService } from '../service/storage.service';
 
 @Component({
@@ -11,8 +12,10 @@ import { StorageService } from '../service/storage.service';
 export class ProfileComponent implements OnInit {
 
   currentUser: any;
+  file?: File;
 
-  constructor(private storageService: StorageService, private authService: AuthService, private router: Router) {};
+  constructor(private storageService: StorageService, private authService: AuthService, private router: Router
+    ,private fileService: FileService) {};
   
   ngOnInit(): void {
       this.currentUser = this.storageService.getUser();
@@ -32,6 +35,16 @@ export class ProfileComponent implements OnInit {
         alert(err.message);
       }
     })
+  }
+
+
+  fileUpload(e: any): void {
+    this.file = e.target.files[0];
+
+  }
+
+  doUpload() {
+    this.fileService.imageUplad(this.file).subscribe();
   }
 
 
