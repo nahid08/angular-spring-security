@@ -40,7 +40,7 @@ public class MetaDataServiceImpl implements MetaDataService{
         metadata.put("Content-Type", file.getContentType());
         metadata.put("Content-Length", String.valueOf(file.getSize()));
 
-        String path = String.format("%s/%s", bucketName, UUID.randomUUID());
+        String path = String.format("%s/%s", bucketName, "Security");
         String fileName = String.format("%s", file.getOriginalFilename());
 
         PutObjectResult putObjectResult = amazonS3Service.upload(path, fileName, Optional.of(metadata), file.getInputStream());

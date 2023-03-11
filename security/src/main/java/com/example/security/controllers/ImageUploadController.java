@@ -24,6 +24,7 @@ public class ImageUploadController {
             metaDataService.upload(file);
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return "Upload is completed";
     }
