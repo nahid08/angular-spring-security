@@ -44,7 +44,12 @@ export class ProfileComponent implements OnInit {
   }
 
   doUpload() {
-    this.fileService.imageUplad(this.file).subscribe();
+    if(this.file) {
+      
+      this.fileService.imageUplad(this.file, this.currentUser.username + ".jpg").subscribe();
+
+    }
+   
   }
 
 
