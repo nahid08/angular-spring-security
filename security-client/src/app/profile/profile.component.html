@@ -6,20 +6,26 @@
     </div>
 
     <div class="row">
-        <div class="col">
-            <img class="img-fluid rounded">
+        <div class="col text-center">
+            <img class="img-fluid rounded" style="height: 500px; width: 300px;" src="{{imageUrl}}"  style="height: 200px;">
         </div>
     </div>
 
     <div class="row pt-3">
         <div class="col text-center">
-            <input type="file" (change)="fileUpload($event)">
+            <input type="file" accept="image/*" (change)="fileUpload($event)">
         </div>
     </div>
 
     <div class="row pt-3">
         <div class="col text-center">
             <button class="btn-primary" (click)="doUpload()">Upload</button>
+        </div>
+    </div>
+
+    <div class="row pt-3">
+        <div class="col text-center">
+            <button class="btn-primary" (click)="getImageFromS3()">Show Profile Picture</button>
         </div>
     </div>
 

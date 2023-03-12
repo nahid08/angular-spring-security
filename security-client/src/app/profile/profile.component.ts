@@ -13,12 +13,16 @@ export class ProfileComponent implements OnInit {
 
   currentUser: any;
   file?: File;
+  imageUrl: string = "";
 
   constructor(private storageService: StorageService, private authService: AuthService, private router: Router
     ,private fileService: FileService) {};
   
   ngOnInit(): void {
       this.currentUser = this.storageService.getUser();
+      if(window.sessionStorage.getItem("imageUrl")) {
+        this.imageUrl = window.sessionStorage.getItem("imageUrl") as string;
+      }
      
   }
 
@@ -46,8 +50,31 @@ export class ProfileComponent implements OnInit {
   doUpload() {
     if(this.file) {
       
-      this.fileService.imageUplad(this.file, this.currentUser.username + ".jpg").subscribe();
+      this.fileService.imageUplad(this.file, this.currentUser.username + ".jpg").subscribe({
+        next: data => {
+          window.sessionStorage.removeItem("imageUrl");
+        },
+       error: err => {
+        console.log(err.message)
+       }
+      });
 
+    }
+   
+  }
+
+
+  getImageFromS3() {
+    if(!window.sessionStorage.getItem("imageUrl")) {
+      this.fileService.getImageFromS3(17).subscribe({
+        next: data => {
+          this.imageUrl = data.objectContent.httpRequest.uri
+          window.sessionStorage.setItem("imageUrl", this.imageUrl);
+        },
+        error: err => {
+          console.log(err.message);
+        }
+      });
     }
    
   }

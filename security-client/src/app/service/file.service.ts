@@ -19,4 +19,8 @@ export class FileService {
         formData.append("file", file, name);
         return this.http.post<any>(FILE_API + "upload", formData);
     }
+
+    getImageFromS3(fileId: number) {
+        return this.http.get<any>(FILE_API + "fetch",  {params: {fileId}})
+    }
 }
