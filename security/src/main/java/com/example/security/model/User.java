@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +24,7 @@ public class User {
 
     @NotBlank
     @Size(max=20)
+    @UniqueElements
     private String username;
 
     @Email
@@ -39,6 +41,12 @@ public class User {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="user_roles", joinColumns= @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "file_id", referencedColumnName = "id")
+//    private File file;
+//
+//
 
     public User() {
     }
@@ -83,6 +91,10 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public User(String username, String email, String password) {

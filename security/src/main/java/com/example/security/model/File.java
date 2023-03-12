@@ -21,6 +21,10 @@ public class File {
     @Column(name="VERSION")
     private String version;
 
+//    @OneToOne
+//    private User user;
+
+    public  File() {};
     public File(String fileName, String filePath, String version) {
         this.fileName = fileName;
         this.filePath = filePath;
