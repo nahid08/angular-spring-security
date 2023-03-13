@@ -7,15 +7,17 @@
 
     <div class="row">
         <div class="col text-center">
-            <img class="img-fluid rounded" style="height: 500px; width: 300px;" src="{{imageUrl}}"  style="height: 200px;">
+            <img class="img-fluid rounded" style="height: 500px; width: 300px;" [src]="imageUrl"  style="height: 200px;">
         </div>
     </div>
 
     <div class="row pt-3">
         <div class="col text-center">
-            <input type="file" accept="image/*" (change)="fileUpload($event)">
+             <button class="text-bg-success" (click)="modalOpen()">Change Profile Picture</button>
         </div>
     </div>
+
+
 
     <div class="row pt-3">
         <div class="col text-center">
@@ -35,5 +37,38 @@
         </div>
 
     </div>
+
     
 </div>
+
+<!-- Modal -->
+<div class="modal" id="exampleModal"  [ngStyle]="{'display': displayModal}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header  text-center">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Change Profile Picture</h1>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <input type="file" accept="image/*" (change)="fileUpload($event)">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <img class="img-fluid rounded" style="height: 500px; width: 300px;" [src]="preview"  style="height: 200px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class=" btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Cancel</button>
+          <button type="button" class="btn btn-secondary" (click)="doUpload()">Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

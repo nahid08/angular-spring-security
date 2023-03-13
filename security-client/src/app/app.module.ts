@@ -11,6 +11,8 @@ import { BoardAdminModule } from './board-admin/board-admin.module';
 import { HomeModule } from './home/home.module';
 import { RegistrationModule } from './registration/registration.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { ProfileModule } from './profile/profile.module';
 
 
 @NgModule({
@@ -19,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     LoginModule,
     HttpClientModule,
@@ -26,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BoardAdminModule,
     HomeModule,
     RegistrationModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
 
   ],
   providers: [httpInterceptorsProviders],
