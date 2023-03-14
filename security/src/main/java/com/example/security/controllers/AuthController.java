@@ -11,6 +11,7 @@ import com.example.security.payload.response.UserInfoResponse;
 import com.example.security.repository.RoleRepository;
 import com.example.security.repository.UserRepository;
 import com.example.security.security.jwt.JwtUtils;
+import com.example.security.services.AuthService;
 import com.example.security.services.UserDetailsImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,9 @@ public class AuthController {
 
     @Autowired
     PasswordEncoder encoder;
+
+    @Autowired
+    AuthService authService;
 
     @PostMapping("/api/auth/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -111,7 +115,7 @@ public class AuthController {
             });
         }
         user.setRoles(roles);
-        userRepository.save(user);
+        authService.saveNewUser(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully"));
 

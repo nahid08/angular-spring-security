@@ -5,8 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface FileMetaRepository extends CrudRepository<File, Integer> {
+public interface FileMetaRepository extends CrudRepository<File, Long> {
 
-    Optional<File> findByfileName(String fileName);
+    Optional<File> findByUser(Long id);
 
 }

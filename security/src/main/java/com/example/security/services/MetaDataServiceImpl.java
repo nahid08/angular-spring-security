@@ -2,6 +2,7 @@ package com.example.security.services;
 
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3Object;
+import com.example.security.dto.UploadDTO;
 import com.example.security.model.File;
 import com.example.security.repository.FileMetaRepository;
 import com.example.security.repository.UserRepository;
@@ -39,7 +40,10 @@ public class MetaDataServiceImpl implements MetaDataService{
 
 
     @Override
-    public PutObjectResult upload(MultipartFile file) throws IOException {
+    public PutObjectResult upload(UploadDTO req) throws IOException {
+        MultipartFile file = req.getFile();
+        Long id = Long.valueOf(req.getId());
+
         if(file.isEmpty()) {
             throw new IllegalStateException("Cannot upload Empty File");
         }
@@ -56,14 +60,23 @@ public class MetaDataServiceImpl implements MetaDataService{
         logger.info("File is uploaded to Amazon S3");
         logger.info(putObjectResult.getContentMd5() + " " + putObjectResult.getMetadata() + " " + putObjectResult.getVersionId());
 
-        fileMetaRepository.save(new File(fileName, path, putObjectResult.getMetadata().getVersionId()));
+        Optional<File> savedFile = fileMetaRepository.findByUser(id);
+
+        if(savedFile.isPresent()) {
+            File updatedFile = savedFile.get();
+            updatedFile.setFileName(fileName);
+            updatedFile.setFilePath(path);
+            updatedFile.setVersion(putObjectResult.getMetadata().getVersionId());
+            fileMetaRepository.save(updatedFile);
+        }
+
 
         return putObjectResult;
     }
 
 
     @Override
-    public S3Object download(int id) {
+    public S3Object download(Long id) {
         File file = fileMetaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
         return amazonS3Service.download(file.getFilePath(), file.getFileName());
     }

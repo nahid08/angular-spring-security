@@ -10,7 +10,7 @@ public class File {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name="FILE_NAME")
     private String fileName;
@@ -21,8 +21,10 @@ public class File {
     @Column(name="VERSION")
     private String version;
 
-//    @OneToOne
-//    private User user;
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public  File() {};
     public File(String fileName, String filePath, String version) {
@@ -31,11 +33,11 @@ public class File {
         this.version = version;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -61,5 +63,20 @@ public class File {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public File(String fileName, String filePath, String version, User user) {
+        this.fileName = fileName;
+        this.filePath = filePath;
+        this.version = version;
+        this.user = user;
     }
 }
