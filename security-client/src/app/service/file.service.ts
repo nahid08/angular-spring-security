@@ -13,11 +13,15 @@ export class FileService {
 
     constructor(private http: HttpClient) {};
 
-    imageUplad(file: any, name: string) {
+    imageUplad(file: any, name: string, id: number) {
 
         const formData = new FormData();
         formData.append("file", file, name);
-        return this.http.post<any>(FILE_API + "upload", formData);
+        let params = {
+            file: formData,
+            id: id
+        }
+        return this.http.post<any>(FILE_API + "upload", params);
     }
 
     getImageFromS3(fileId: number) {

@@ -64,8 +64,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   doUpload() {
     if(this.file) {
+
+
       
-      this.fileService.imageUplad(this.file, this.currentUser.username + ".jpg").subscribe({
+      this.fileService.imageUplad(this.file, this.currentUser.username + ".jpg", this.currentUser.id).subscribe({
         next: data => {
           window.sessionStorage.removeItem("imageUrl");
           this.getImageFromS3();
