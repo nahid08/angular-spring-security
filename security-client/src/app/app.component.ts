@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from './CommonService';
 import { AuthService } from './service/auth.service';
+import { SpinnerService } from './service/spinner.service';
 import { StorageService } from './service/storage.service';
 
 @Component({
@@ -15,7 +17,8 @@ export class AppComponent implements OnInit {
   showModeratorBoard: boolean = false;
   username?: string;
 
-  constructor(private storageService: StorageService, private authService: AuthService) {};
+  constructor(private storageService: StorageService, private authService: AuthService,private commonService: CommonService,
+    public spinnerService: SpinnerService) {};
 
   ngOnInit(): void {
       this.isLoggedIn = this.storageService.isLoggedIn();
@@ -29,5 +32,21 @@ export class AppComponent implements OnInit {
         this.username = user.username;
       }
   }
+
+
+  doLogOut(): void {
+    this.authService.logout().subscribe({
+      next: res => {
+        console.log(res);
+        this.storageService.clean();
+        this.commonService.router.navigate(["/login"]);
+      },
+
+      error: err => {
+        this.commonService.dialogBoxService.open({title: 'Error', message: err.message})
+      }
+    })
+  }
+
 
 }

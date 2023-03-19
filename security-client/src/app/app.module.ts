@@ -14,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ProfileModule } from './profile/profile.module';
 import { DialogBoxModule } from './dialogBox/dialogBox.module';
-import { MatDialog } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -31,7 +31,8 @@ import { MatDialog } from '@angular/material/dialog';
     BoardAdminModule,
     HomeModule,
     RegistrationModule, 
-    DialogBoxModule
+    DialogBoxModule,
+    MatProgressSpinnerModule
 
   ],
   providers: [httpInterceptorsProviders],

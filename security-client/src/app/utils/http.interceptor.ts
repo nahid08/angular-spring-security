@@ -1,5 +1,6 @@
 import  { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { Observable } from 'rxjs';
+import { CustomHttpInterceptors } from './customHttp.interceptors';
 
 
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -17,5 +18,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 }
 
 export const httpInterceptorsProviders = [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptors, multi: true}
 ]

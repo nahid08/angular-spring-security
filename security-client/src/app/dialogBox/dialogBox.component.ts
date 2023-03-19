@@ -11,7 +11,6 @@ export class DialogBoxComponent {
 
 
    constructor(@Inject (MAT_DIALOG_DATA) public data: Data, public mdRef: MatDialogRef<DialogBoxComponent>) {};
-    message: string = "There is no warning.";
 
     close() {
       this.mdRef.close();

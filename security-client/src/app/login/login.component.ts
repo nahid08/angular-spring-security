@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { CommonService } from "../CommonService";
 import { DialogBoxService } from "../dialogBox/dialogBox.service";
 import { AuthService } from "../service/auth.service";
 import { StorageService } from "../service/storage.service";
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     errorMessage: boolean = false;
     roles: string[] = [];
 
-    constructor(private authService: AuthService, private storageService: StorageService, private router: Router, private dialogBoxService: DialogBoxService) {};
+    constructor(private authService: AuthService, private storageService: StorageService,
+        private commonService: CommonService) {};
 
    ngOnInit(): void {
        if(this.storageService.isLoggedIn()) {
@@ -44,13 +46,13 @@ export class LoginComponent implements OnInit {
         error: err => {
             this.errorMessage = err.message;
             this.isLoginFailed = true;
-            this.dialogBoxService.open({title: 'Error', message: err.message})
+            this.commonService.dialogBoxService.open({title: 'Error', message: err.message})
         }
       })
    }
 
    reloadPage(): void {
-    this.router.navigate(['/profile']);
+    this.commonService.router.navigate(['/profile']);
     
    }
 

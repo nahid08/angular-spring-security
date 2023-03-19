@@ -1,1 +1,21 @@
+
+<nav class="navbar navbar-expand  navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand ">Angular Spring Security</a>
+        <ul class="nav navbar-nav collapse navbar-collapse" routerLinkActive="active">
+            <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="profile">Profile</a></li>
+        </ul>   
+        <div>
+            <button (click)="doLogOut()" class="form-control btn-primary">Log Out</button>
+        </div>    
+    </div>
+</nav>
+
+
 <router-outlet></router-outlet>
+
+ <mat-spinner [diameter]="50" style="margin:0 auto;" 
+    mode="indeterminate"  *ngIf="spinnerService.visibilty | async"></mat-spinner>
+
+

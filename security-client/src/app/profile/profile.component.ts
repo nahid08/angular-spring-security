@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonService } from '../CommonService';
 import { DialogBoxService } from '../dialogBox/dialogBox.service';
 import { AuthService } from '../service/auth.service';
 import { FileService } from '../service/file.service';
@@ -18,8 +19,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   displayModal: "block" | "none" = "none";
   preview: any;
 
-  constructor(private storageService: StorageService, private authService: AuthService, private router: Router
-    ,private fileService: FileService, private dialogBoxService: DialogBoxService) {};
+  constructor(private storageService: StorageService, private authService: AuthService
+    ,private fileService: FileService, private commonService: CommonService) {};
   
   ngOnInit(): void {
       this.currentUser = this.storageService.getUser();
@@ -40,11 +41,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
       next: res => {
         console.log(res);
         this.storageService.clean();
-        this.router.navigate(["/login"]);
+        this.commonService.router.navigate(["/login"]);
       },
 
       error: err => {
-        this.dialogBoxService.open({title: 'Error', message: err.message})
+        this.commonService.dialogBoxService.open({title: 'Error', message: err.message})
       }
     })
   }
@@ -67,7 +68,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if(this.file) {
       this.fileService.imageUplad(this.file, this.currentUser.username + ".jpg", this.currentUser.id).subscribe(data => {
         if(data.message) {
-          this.dialogBoxService.open({title: 'Error', message: data.message})
+          this.commonService.dialogBoxService.open({title: 'Error', message: data.message})
         } else {
           window.sessionStorage.removeItem("imageUrl");
           this.getImageFromS3();
@@ -83,7 +84,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.fileService.getImageFromS3(this.currentUser.id).subscribe(data => {
         if(data.response) {
           this.closeModal();
-          this.dialogBoxService.open({title: 'Error', message: data.response})
+          this.commonService.dialogBoxService.open({title: 'Error', message: data.response})
         } else {
           this.imageUrl = data.s3.objectContent.httpRequest.uri
           window.sessionStorage.setItem("imageUrl", this.imageUrl);
@@ -104,7 +105,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 
   openDIalog() {
-    this.dialogBoxService.open({title: "testing", message: "message is ok"});
+    this.commonService.dialogBoxService.open({title: "testing", message: "message is ok"});
   }
 
 

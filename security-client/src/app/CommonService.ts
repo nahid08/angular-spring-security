@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { DialogBoxService } from "./dialogBox/dialogBox.service";
 
 
 
@@ -7,7 +9,11 @@ import { Injectable } from "@angular/core";
 })
 export class CommonService {
 
-    constructor() {
+    router: Router;
+    dialogBoxService: DialogBoxService;
+    constructor(router: Router, dialogBoxService: DialogBoxService) {
+        this.router = router;
+        this.dialogBoxService = dialogBoxService;
         
     }
 }
