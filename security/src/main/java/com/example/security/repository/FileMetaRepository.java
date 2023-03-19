@@ -7,6 +7,8 @@ import java.util.Optional;
 
 public interface FileMetaRepository extends CrudRepository<File, Long> {
 
-    Optional<File> findByUser(Long id);
+    Optional<File> findByUserId(Long id);
+
+    Optional<File> findById(Long id);
 
 }

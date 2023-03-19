@@ -21,8 +21,7 @@ public class File {
     @Column(name="VERSION")
     private String version;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 

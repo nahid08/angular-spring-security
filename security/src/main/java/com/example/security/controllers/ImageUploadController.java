@@ -7,6 +7,7 @@ import com.example.security.dto.UploadDTO;
 import com.example.security.services.MetaDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -18,10 +19,11 @@ public class ImageUploadController {
     MetaDataService metaDataService;
 
     @PostMapping("/profile/image/upload")
-    public PutObjectResult upload(@RequestBody  UploadDTO request) throws IOException {
+    public PutObjectResult upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id) throws IOException {
         PutObjectResult response = null;
         try {
-           response = metaDataService.upload(request);
+            UploadDTO req = new UploadDTO(id, file);
+           response = metaDataService.upload(req);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

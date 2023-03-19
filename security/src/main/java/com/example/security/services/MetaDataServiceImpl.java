@@ -6,7 +6,6 @@ import com.example.security.dto.UploadDTO;
 import com.example.security.model.File;
 import com.example.security.repository.FileMetaRepository;
 import com.example.security.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +59,7 @@ public class MetaDataServiceImpl implements MetaDataService{
         logger.info("File is uploaded to Amazon S3");
         logger.info(putObjectResult.getContentMd5() + " " + putObjectResult.getMetadata() + " " + putObjectResult.getVersionId());
 
-        Optional<File> savedFile = fileMetaRepository.findByUser(id);
+        Optional<File> savedFile = fileMetaRepository.findByUserId(id);
 
         if(savedFile.isPresent()) {
             File updatedFile = savedFile.get();
@@ -77,7 +76,8 @@ public class MetaDataServiceImpl implements MetaDataService{
 
     @Override
     public S3Object download(Long id) {
-        File file = fileMetaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+          File file = fileMetaRepository.findByUserId(id).get();
+//        File file = fileMetaRepository.findById(a.get).orElseThrow(() -> new EntityNotFoundException());
         return amazonS3Service.download(file.getFilePath(), file.getFileName());
     }
 

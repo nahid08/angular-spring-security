@@ -4,14 +4,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UploadDTO {
 
-    int id;
+    Long id;
     MultipartFile file;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public UploadDTO(Long id, MultipartFile file) {
+        this.id = id;
+        this.file = file;
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
