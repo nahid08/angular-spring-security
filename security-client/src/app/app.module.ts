@@ -13,6 +13,8 @@ import { RegistrationModule } from './registration/registration.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ProfileModule } from './profile/profile.module';
+import { DialogBoxModule } from './dialogBox/dialogBox.module';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -28,9 +30,8 @@ import { ProfileModule } from './profile/profile.module';
     FormsModule,
     BoardAdminModule,
     HomeModule,
-    RegistrationModule,
-    BrowserAnimationsModule,
-    
+    RegistrationModule, 
+    DialogBoxModule
 
   ],
   providers: [httpInterceptorsProviders],
