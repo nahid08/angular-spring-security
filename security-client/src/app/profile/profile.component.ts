@@ -84,7 +84,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   getImageFromS3() {
     if(!window.sessionStorage.getItem("imageUrl")) {
-      this.fileService.getImageFromS3(29).subscribe({
+      this.fileService.getImageFromS3(this.currentUser.id).subscribe({
         next: data => {
           this.imageUrl = data.objectContent.httpRequest.uri
           window.sessionStorage.setItem("imageUrl", this.imageUrl);

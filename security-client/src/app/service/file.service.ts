@@ -17,11 +17,7 @@ export class FileService {
 
         const formData = new FormData();
         formData.append("file", file, name);
-        let params = {
-            file: formData,
-            id: id
-        }
-        return this.http.post<any>(FILE_API + "upload", params);
+        return this.http.post<any>(FILE_API + "upload", formData, {params: {id}});
     }
 
     getImageFromS3(fileId: number) {
