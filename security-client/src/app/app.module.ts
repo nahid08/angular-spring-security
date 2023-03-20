@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 import { ProfileModule } from './profile/profile.module';
 import { DialogBoxModule } from './dialogBox/dialogBox.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { urlProvider } from './utils/token/config';
+
 
 
 @NgModule({
@@ -35,7 +37,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule
 
   ],
-  providers: [httpInterceptorsProviders],
+  providers: [httpInterceptorsProviders, urlProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

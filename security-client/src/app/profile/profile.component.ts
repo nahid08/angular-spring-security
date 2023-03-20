@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { CommonService } from '../CommonService';
-import { DialogBoxService } from '../dialogBox/dialogBox.service';
 import { AuthService } from '../service/auth.service';
 import { FileService } from '../service/file.service';
 import { StorageService } from '../service/storage.service';
@@ -27,27 +25,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if(window.sessionStorage.getItem("imageUrl")) {
         this.imageUrl = window.sessionStorage.getItem("imageUrl") as string;
       }
-     
+    
   }
 
   ngOnDestroy(): void {
      
-  }
-
-
-
-  doLogOut(): void {
-    this.authService.logout().subscribe({
-      next: res => {
-        console.log(res);
-        this.storageService.clean();
-        this.commonService.router.navigate(["/login"]);
-      },
-
-      error: err => {
-        this.commonService.dialogBoxService.open({title: 'Error', message: err.message})
-      }
-    })
   }
 
 

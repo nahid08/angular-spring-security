@@ -4,7 +4,6 @@ import { FormsModule } from "@angular/forms";
 import { ProfileComponent } from "./profile.component";
 
 
-
 @NgModule({
     imports: [
         CommonModule,
@@ -12,6 +11,9 @@ import { ProfileComponent } from "./profile.component";
     ],
     declarations: [
         ProfileComponent
+    ],
+    providers: [
+    
     ]
 })
 

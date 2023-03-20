@@ -22,9 +22,7 @@ import { DialogBoxService } from "./dialogBox.service";
     entryComponents: [
         DialogBoxComponent
     ],
-    providers: [
-        DialogBoxService,       
-    ]
+   
 })
 
 export class DialogBoxModule{};
