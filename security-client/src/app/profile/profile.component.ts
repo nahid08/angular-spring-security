@@ -3,6 +3,7 @@ import { CommonService } from '../CommonService';
 import { AuthService } from '../service/auth.service';
 import { FileService } from '../service/file.service';
 import { StorageService } from '../service/storage.service';
+import { WebSocketService } from '../service/websocket.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +19,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   preview: any;
 
   constructor(private storageService: StorageService, private authService: AuthService
-    ,private fileService: FileService, private commonService: CommonService) {};
+    ,private fileService: FileService, private commonService: CommonService,private socketService: WebSocketService) {};
   
   ngOnInit(): void {
       this.currentUser = this.storageService.getUser();
@@ -88,6 +89,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   openDIalog() {
     this.commonService.dialogBoxService.open({title: "testing", message: "message is ok"});
+  }
+
+  sendMsg() {
+    let message = {
+      name: "nahid",
+      message: "hello world"
+    }
+
+    this.socketService.message?.next(message);
   }
 
 
