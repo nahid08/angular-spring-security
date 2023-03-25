@@ -10,13 +10,13 @@ import { httpInterceptorsProviders } from './utils/http.interceptor';
 import { BoardAdminModule } from './board-admin/board-admin.module';
 import { HomeModule } from './home/home.module';
 import { RegistrationModule } from './registration/registration.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
-import { ProfileModule } from './profile/profile.module';
 import { DialogBoxModule } from './dialogBox/dialogBox.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { urlProvider } from './utils/token/config';
-
+import { SocketIoConfig } from 'ngx-socket-io';
+import { SocketIoModule } from 'ngx-socket-io';
+import { ProfileModule } from './profile/profile.module';
 
 
 @NgModule({
@@ -34,7 +34,7 @@ import { urlProvider } from './utils/token/config';
     HomeModule,
     RegistrationModule, 
     DialogBoxModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
 
   ],
   providers: [httpInterceptorsProviders, urlProvider],

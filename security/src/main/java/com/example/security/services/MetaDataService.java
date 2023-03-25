@@ -11,6 +11,6 @@ import java.util.List;
 public interface MetaDataService {
 
     public PutObjectResult upload(UploadDTO req) throws IOException;
-    public S3Object download(Long id);
+    public S3Object download(Long id) throws  IOException;
     public List<File> list();
 }

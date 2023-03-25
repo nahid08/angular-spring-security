@@ -1,63 +1,41 @@
-import { Injectable } from "@angular/core";
-import { map, Observable, Observer } from "rxjs";
-import { AnonymousSubject, Subject } from "rxjs/internal/Subject";
-
-export interface Message {
-    name: string;
-    message: string;
-}
+// import { Injectable } from "@angular/core";
 
 
-const CHAT_URL = "ws://localhost:8000/api/greetings";
+// export interface Document {
+//     name: string,
+//     message: string
+// }
 
-@Injectable({
-    providedIn: 'root'
-})
-export class WebSocketService {
-     subject?: AnonymousSubject<MessageEvent>;
-     message?: Subject<Message>;
 
-     constructor() {
-        this.message = <Subject<Message>>this.connect(CHAT_URL).pipe(
-            map(
-                (response: MessageEvent): Message => {
-                    console.log(response.data)
-                    let data = JSON.parse(response.data);
-                    return data;
-                }
-            )
-        )
-     }
+// @Injectable({
+//     providedIn: 'root'
+// })
+// export class WebSocketService {
 
-     connect(url: string): AnonymousSubject<MessageEvent> {
-        if(!this.subject) {
-            this.subject = this.create(url);
-        }
+//     stompClient: any;
+//     msg: any;
 
-        return this.subject;
-     }
+//     constructor() {
+//         this.initializeWebSocketConnection();
+//     }
 
-     private create(url: string): AnonymousSubject<MessageEvent> {
-        let ws = new WebSocket(url);
-        let observable = new Observable((obs: Observer<MessageEvent>) => {
-            ws.onmessage = obs.next.bind(obs);
-            ws.onerror = obs.error.bind(obs)
-            ws.onclose = obs.complete.bind(obs);
-            return ws.close.bind(ws);
-        })
+//     initializeWebSocketConnection() {
+//         const serverUrl = 'http//localhost:8081/socket';
+//         var sock = new any('https://mydomain.com/my_prefix');
+//         this.stompClient = stompc.over(ws);
+//         const that = this;
+//         this.stompClient.connect({}, (frame: any) => {
+//             this.stompClient.subscribe('/message', (message: any) => {
+//                 if(message.body) {
+//                     that.msg.push(message.body);
+//                 }
+//             })
+//         })
+//     }
 
-        let observer = {
-            error: null,
-            complete: null,
-            next: (data: Object) => {
-                console.log('Message sent to websocket');
-                if(ws.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify(data));
-                }
-            }
-        }
 
-        return new AnonymousSubject<MessageEvent>(observer as any, observable);
-     }
- 
-}
+//     sendMessage(message) {
+//         this.stompClient.send("/app/send/message", {}, message);
+//     }
+
+// }

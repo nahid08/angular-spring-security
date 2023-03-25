@@ -6,8 +6,8 @@
     </div>
 
     <div class="row">
-        <div class="col text-center">
-            <img class="img-fluid rounded" style="height: 500px; width: 300px;" [src]="imageUrl"  style="height: 200px;">
+        <div class="col text-center image-div">
+            <img class="img-fluid rounded" style="height: 500px; width: 300px;" [src]="getImage()"  style="height: 200px;">
         </div>
     </div>
 
@@ -41,7 +41,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal" id="exampleModal"  [ngStyle]="{'display': displayModal}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- [ngStyle]="{'display': displayModal}" -->
+<div class="modal" id="exampleModal" [ngStyle]="{'display': displayModal}"   tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header  text-center">

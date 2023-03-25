@@ -2,11 +2,10 @@ package com.example.security.controllers;
 
 
 import com.amazonaws.services.s3.model.PutObjectResult;
-import com.amazonaws.services.s3.model.S3Object;
 import com.example.security.dto.FetchResponseDTO;
 import com.example.security.dto.UploadDTO;
 import com.example.security.dto.UploadResponseDTO;
-import com.example.security.services.MetaDataService;
+import com.example.security.services.MetaDataServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +17,7 @@ import java.io.IOException;
 public class ImageUploadController {
 
     @Autowired
-    MetaDataService metaDataService;
+    MetaDataServiceImpl metaDataService;
 
     @PostMapping("/profile/image/upload")
     public UploadResponseDTO upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id) throws IOException {
@@ -40,11 +39,11 @@ public class ImageUploadController {
 
     @GetMapping("/profile/image/fetch")
     public  FetchResponseDTO feth(@RequestParam("fileId") int fileId) throws IOException {
-        S3Object response = null;
+        String response = null;
         FetchResponseDTO res = new FetchResponseDTO();
         try {
-            response = metaDataService.download(Long.valueOf(fileId));
-            res.setS3(response);
+            response = metaDataService.downLoad(Long.valueOf(fileId), "dasdsa");
+            res.setImgStr(response);
         } catch (Exception e) {
            res.setResponse(e.getMessage());
            return res;

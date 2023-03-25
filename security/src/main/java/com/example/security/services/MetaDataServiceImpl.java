@@ -23,7 +23,7 @@ public class MetaDataServiceImpl implements MetaDataService{
 
 
     @Autowired
-    AmazonS3Service amazonS3Service;
+    AmazonS3ServiceImpl amazonS3Service;
 
     @Autowired
     private FileMetaRepository fileMetaRepository;
@@ -75,7 +75,7 @@ public class MetaDataServiceImpl implements MetaDataService{
 
 
     @Override
-    public S3Object download(Long id) {
+    public S3Object download(Long id) throws  IOException {
           File file = fileMetaRepository.findByUserId(id).get();
 //        File file = fileMetaRepository.findById(a.get).orElseThrow(() -> new EntityNotFoundException());
         return amazonS3Service.download(file.getFilePath(), file.getFileName());
@@ -86,5 +86,12 @@ public class MetaDataServiceImpl implements MetaDataService{
         List<File> metas = new ArrayList<>();
         fileMetaRepository.findAll().forEach(metas::add);
         return metas;
+    }
+
+
+    public  String downLoad(Long id, String name) throws IOException   {
+        File file = fileMetaRepository.findByUserId(id).get();
+
+        return amazonS3Service.download(file.getFilePath(), file.getFileName(), name);
     }
 }

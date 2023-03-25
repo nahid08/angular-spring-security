@@ -7,6 +7,8 @@ public class FetchResponseDTO {
     String response;
     S3Object s3;
 
+    String imgStr;
+
     public String getResponse() {
         return response;
     }
@@ -21,5 +23,13 @@ public class FetchResponseDTO {
 
     public void setS3(S3Object s3) {
         this.s3 = s3;
+    }
+
+    public String getImgStr() {
+        return imgStr;
+    }
+
+    public void setImgStr(String imgStr) {
+        this.imgStr = imgStr;
     }
 }
