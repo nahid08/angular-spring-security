@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { catchError, of } from "rxjs";
 import { CommonService } from "../CommonService";
 import { DialogBoxService } from "../dialogBox/dialogBox.service";
 import { AuthService } from "../service/auth.service";
@@ -34,21 +35,35 @@ export class LoginComponent implements OnInit {
 
       
 
-      this.authService.login(this.username, this.password).subscribe({
-        next: data => {
-            this.storageService.saveUser(data);
+    //   this.authService.login(this.username, this.password).subscribe({
+    //     next: data => {
+    //         this.storageService.saveUser(data);
+    //         this.isLoginFailed = false;
+    //         this.isLoggedIn = true;
+    //         this.roles = this.storageService.getUser().roles;
+    //         this.reloadPage();
+    //     },
+    //     error: err => {
+    //         this.errorMessage = err.message;
+    //         this.isLoginFailed = true;
+    //         this.commonService.dialogBoxService.open({title: 'Error', message: err.message})
+    //     }
+    //   })
 
-            this.isLoginFailed = false;
-            this.isLoggedIn = true;
-            this.roles = this.storageService.getUser().roles;
-            this.reloadPage();
-        },
-        error: err => {
+    this.authService.login(this.username, this.password).pipe(
+        catchError((err) => {
             this.errorMessage = err.message;
             this.isLoginFailed = true;
             this.commonService.dialogBoxService.open({title: 'Error', message: err.message})
-        }
-      })
+            return of("");
+        })
+    ).subscribe(data => {
+        this.storageService.saveUser(data);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.storageService.getUser().roles;
+        this.reloadPage();
+    })
    }
 
    reloadPage(): void {

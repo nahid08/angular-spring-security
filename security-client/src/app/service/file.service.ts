@@ -1,9 +1,17 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 
 
 const FILE_API = "http://localhost:9000/profile/image/";
+
+const httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': 'http://localhost:9000',
+    'Access-Control-Allow-Credentials': "true",
+    'Access-Control-Allow-Headers': 'Content-Type',
+    }),
+}
 
 
 @Injectable({

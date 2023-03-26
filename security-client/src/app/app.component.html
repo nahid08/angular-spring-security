@@ -15,7 +15,17 @@
 
 <router-outlet></router-outlet>
 
- <mat-spinner [diameter]="50" style="margin:0 auto;" 
-    mode="indeterminate"  *ngIf="spinnerService.visibilty | async"></mat-spinner>
+<ng-container *ngIf="spinnerService.visibilty | async">
+<ng-container *ngTemplateOutlet="loadingTemp"></ng-container>
+</ng-container>
 
- 
+
+<ng-template #loadingTemp>
+    <mat-spinner [diameter]="50" style="margin:0 auto;" 
+    mode="indeterminate" ></mat-spinner>
+</ng-template>
+
+<!-- 
+<mat-spinner [diameter]="50" style="margin:0 auto;" 
+mode="indeterminate"  *ngIf="spinnerService.visibilty | async"></mat-spinner>
+  -->

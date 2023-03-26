@@ -37,8 +37,9 @@ public class ImageUploadController {
 
     }
 
+
     @GetMapping("/profile/image/fetch")
-    public  FetchResponseDTO feth(@RequestParam("fileId") int fileId) throws IOException {
+    public  FetchResponseDTO fetch(@RequestParam("fileId") int fileId) throws IOException {
         String response = null;
         FetchResponseDTO res = new FetchResponseDTO();
         try {

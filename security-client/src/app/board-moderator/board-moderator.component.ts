@@ -15,16 +15,18 @@ export class BoardModeratorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.userService.getModeratorBoard().subscribe({
-        next: data => {
-          this.content = data;
-        },
-
-        error: err => {
-          this.content = err.message;
-        } 
+      setTimeout(() => {
+        this.userService.getModeratorBoard().subscribe({
+          next: data => {
+            this.content = data;
+          },
+  
+          error: err => {
+            this.content = err.message;
+          } 
+        })
       })
-  }
+  } 
 
   
 

@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   currentUser: any;
   file?: File;
-  imageUrl: string = "";
+  imageUrl: string = image;
   displayModal: "block" | "none" = "none";
   preview: any;
 
@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     ,private fileService: FileService, private commonService: CommonService, private domSanitizer: DomSanitizer) {};
   
   ngOnInit(): void {
+    console.log('hello profile')
       this.currentUser = this.storageService.getUser();
       if(window.sessionStorage.getItem("imageUrl")) {
         this.imageUrl = window.sessionStorage.getItem("imageUrl") as string;

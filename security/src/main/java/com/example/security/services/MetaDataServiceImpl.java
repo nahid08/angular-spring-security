@@ -11,12 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.*;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class MetaDataServiceImpl implements MetaDataService{
 
     private static final Logger logger = LoggerFactory.getLogger(MetaDataServiceImpl.class);
@@ -68,6 +70,7 @@ public class MetaDataServiceImpl implements MetaDataService{
             updatedFile.setVersion(putObjectResult.getMetadata().getVersionId());
             fileMetaRepository.save(updatedFile);
         }
+
 
 
         return putObjectResult;

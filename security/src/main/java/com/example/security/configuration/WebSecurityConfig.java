@@ -77,15 +77,12 @@ public class WebSecurityConfig {
 //                requestMatchers("/api/test/**").permitAll().anyRequest().authenticated().
 //                requestMatchers("/profile/image/**").permitAll();
 
-
-
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
                 authorizeHttpRequests().requestMatchers("/api/auth/**").permitAll().
+                requestMatchers("/api/test/**").permitAll().
                 requestMatchers("/profile/image/**").permitAll().anyRequest().authenticated();
-
-
 
 
         http.authenticationProvider(authenticationProvider());

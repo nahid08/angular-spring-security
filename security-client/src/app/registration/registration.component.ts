@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { CommonService } from '../CommonService';
 import { AuthService } from '../service/auth.service';
 import { StorageService } from '../service/storage.service';
 
@@ -20,11 +21,11 @@ export class RegistrationComponent implements OnInit {
   role: string[] = ["mod"];
 
 
-  constructor(private authService: AuthService, private storageService: StorageService, private router: Router) {};
+  constructor(private authService: AuthService, private storageService: StorageService, private commonService: CommonService) {};
 
   ngOnInit(): void {
     if(this.storageService.isLoggedIn()) {
-      this.router.navigate(['/profile']);
+      this.commonService.router.navigate(['/profile']);
 
     }
   }
@@ -36,11 +37,12 @@ export class RegistrationComponent implements OnInit {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
-        this.router.navigate(['/profile']);
+        this.commonService.router.navigate(['/profile']);
       },
       error: err => {
         this.errorMessage = err.error.message,
         this.isSignUpFailed = true
+        this.commonService.dialogBoxService.open({title: 'Error', message: err.message})
       }
     })
   }
