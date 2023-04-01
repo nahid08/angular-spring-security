@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
 import { CommonService } from '../CommonService';
 import { AuthService } from '../service/auth.service';
 import { FileService } from '../service/file.service';
@@ -21,7 +22,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   preview: any;
 
   constructor(private storageService: StorageService, private authService: AuthService
-    ,private fileService: FileService, private commonService: CommonService, private domSanitizer: DomSanitizer) {};
+    ,private fileService: FileService, private commonService: CommonService, private domSanitizer: DomSanitizer) {
+      
+    };
   
   ngOnInit(): void {
     console.log('hello profile')
@@ -94,14 +97,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.commonService.dialogBoxService.open({title: "testing", message: "message is ok"});
   }
 
-  sendMsg() {
-    let message = {
-      name: "nahid",
-      message: "hello"
-    }
 
-  //  this.socketService.newDocument();
-  }
 
   getImage() {
     let image = `data:image/*;base64, ${this.imageUrl}`

@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,11 +17,14 @@ import { urlProvider } from './utils/token/config';
 import { SocketIoConfig } from 'ngx-socket-io';
 import { SocketIoModule } from 'ngx-socket-io';
 import { ProfileModule } from './profile/profile.module';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { FormlyModule } from '@ngx-formly/core';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { ProfileModule } from './profile/profile.module';
     RegistrationModule, 
     DialogBoxModule,
     MatProgressSpinnerModule,
+
 
   ],
   providers: [httpInterceptorsProviders, urlProvider],
