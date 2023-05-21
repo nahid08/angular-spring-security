@@ -57,13 +57,16 @@ export class LoginComponent implements OnInit {
             this.commonService.dialogBoxService.open({title: 'Error', message: err.message})
             return of("");
         })
-    ).subscribe(data => {
-        this.storageService.saveUser(data);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.storageService.getUser().roles;
-        this.reloadPage();
-    })
+    ).subscribe((data) => {
+        if(data) {
+            this.storageService.saveUser(data);
+            this.isLoginFailed = false;
+            this.isLoggedIn = true;
+            this.roles = this.storageService.getUser().roles;
+            this.reloadPage();
+        }
+    }
+     )
    }
 
    reloadPage(): void {

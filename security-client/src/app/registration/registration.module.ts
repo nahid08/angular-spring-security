@@ -5,19 +5,10 @@ import { RegistrationComponent } from "./registration.component";
 import {MatSelectModule} from '@angular/material/select';
 import { FormlyBootstrapModule } from "@ngx-formly/bootstrap";
 import { FormlyFieldConfig, FormlyModule } from "@ngx-formly/core";
+import { emailValidator, minValidationMessage, emailValidationMessage, passwordValidator, passwordValidationMessage } from "../utils/validation/registration.validation";
 
 
-export function minValidationMessage(error: any, field: FormlyFieldConfig) {
-    return  `Length of ${(field.key)} should be more than ${field?.props?.minLength}`;
-}
 
-export function emailValidator(control: AbstractControl) {
-    return !control.value || /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(control.value) ? null : {ip: true} 
-}
-
-export function emailValidationMessage(error: any, field: FormlyFieldConfig) {
-    return "Please enter a valid a email address";
-}
 
 @NgModule({
     imports: [
@@ -26,11 +17,12 @@ export function emailValidationMessage(error: any, field: FormlyFieldConfig) {
         MatSelectModule,
         ReactiveFormsModule,
         FormlyModule.forRoot({
-            validators: [{name: 'ip', validation: emailValidator}],
+            validators: [{name: 'email', validation: emailValidator}, {name: 'password', validation: passwordValidator}],
             validationMessages: [
                 {name: 'required', message: 'This field can not be empty'},
                 {name: 'minLength', message: minValidationMessage},
-                {name: 'ip', message: emailValidationMessage}
+                {name: 'email', message: emailValidationMessage},
+                {name: 'password', message: passwordValidationMessage}
             ]
         }),
         FormlyBootstrapModule,

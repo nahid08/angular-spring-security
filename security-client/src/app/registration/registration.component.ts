@@ -39,10 +39,16 @@ export class RegistrationComponent implements OnInit {
     {
       key: 'password',
       type: 'input',
+      templateOptions: {
+        type: 'password' 
+      } ,
       props: {
         label: 'Password',
         placeHolder: 'Enter Password',
         required: true
+      },
+      validators: {
+        validation: ['password']
       }
     },
     {
@@ -54,10 +60,24 @@ export class RegistrationComponent implements OnInit {
         required: true
       },
       validators: {
-        validation: ['ip']
+        validation: ['email']
       }
       
     },
+    {
+      key: 'role',
+      type: 'select',
+      props: {
+        label: 'Role',
+        required: true,
+        multiple: true,
+        selectAllOption: 'Select All',
+        options: [
+          { value: "admin", label: 'Admin' },
+          { value: "mod", label: 'Moderator' },
+        ],
+      },
+    }
 
   ]
 
