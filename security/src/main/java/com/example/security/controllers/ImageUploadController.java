@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 import com.example.security.dto.FetchResponseDTO;
 import com.example.security.dto.UploadDTO;
 import com.example.security.dto.UploadResponseDTO;
+import com.example.security.repository.Itemrepository;
 import com.example.security.services.MetaDataServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,9 @@ public class ImageUploadController {
 
     @Autowired
     MetaDataServiceImpl metaDataService;
+
+    @Autowired
+    Itemrepository itemrepository;
 
     @PostMapping("/profile/image/upload")
     public UploadResponseDTO upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id) throws IOException {
@@ -43,6 +47,7 @@ public class ImageUploadController {
         String response = null;
         FetchResponseDTO res = new FetchResponseDTO();
         try {
+
             response = metaDataService.downLoad(Long.valueOf(fileId), "dasdsa");
             res.setImgStr(response);
         } catch (Exception e) {

@@ -12,6 +12,7 @@ import com.example.security.repository.RoleRepository;
 import com.example.security.repository.UserRepository;
 import com.example.security.security.jwt.JwtUtils;
 import com.example.security.services.AuthService;
+import com.example.security.services.EmailServiceImpl;
 import com.example.security.services.UserDetailsImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,9 @@ public class AuthController {
     @Autowired
     AuthService authService;
 
+    @Autowired
+    EmailServiceImpl emailService;
+
     @PostMapping("/api/auth/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -70,6 +74,12 @@ public class AuthController {
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setAccessControlAllowOrigin("http://localhost:4200");
+
+        String text = "Your login is successful";
+        String to = "drmc.nahid@gmail.com";
+        String subject = "Log In";
+
+        emailService.sendSimpleMessage(to, subject, text);
 
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(new UserInfoResponse(userDetails.getId(), userDetails.getUsername(),
                 userDetails.getEmail(), roles));
