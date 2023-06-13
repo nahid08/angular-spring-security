@@ -135,6 +135,12 @@
 			<version>1.4.7</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio</artifactId>
+			<version>7.20.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -142,6 +148,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<name>server</name>
+					</image>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

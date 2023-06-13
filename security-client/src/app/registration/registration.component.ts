@@ -111,4 +111,12 @@ export class RegistrationComponent implements OnInit {
     })
   }
 
+  confirmEmail(model: any): void {
+    this.username = model.name;
+    this.email = model.email;
+    this.password = model.password;
+
+    this.authService.confirmEmail(this.username, this.email, this.password, this.role).subscribe({});
+  }
+
 }

@@ -1,6 +1,7 @@
 package com.example.security.controllers;
 
 
+import com.example.security.dto.ConfrimEmailResponse;
 import com.example.security.model.ERole;
 import com.example.security.model.Role;
 import com.example.security.model.User;
@@ -11,9 +12,7 @@ import com.example.security.payload.response.UserInfoResponse;
 import com.example.security.repository.RoleRepository;
 import com.example.security.repository.UserRepository;
 import com.example.security.security.jwt.JwtUtils;
-import com.example.security.services.AuthService;
-import com.example.security.services.EmailServiceImpl;
-import com.example.security.services.UserDetailsImpl;
+import com.example.security.services.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -61,6 +60,12 @@ public class AuthController {
     @Autowired
     EmailServiceImpl emailService;
 
+    @Autowired
+    SmsService smsService;
+
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+
     @PostMapping("/api/auth/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -75,11 +80,8 @@ public class AuthController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setAccessControlAllowOrigin("http://localhost:4200");
 
-        String text = "Your login is successful";
-        String to = "drmc.nahid@gmail.com";
-        String subject = "Log In";
+        emailService.processEmail(loginRequest.getUsername());
 
-        emailService.sendSimpleMessage(to, subject, text);
 
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(new UserInfoResponse(userDetails.getId(), userDetails.getUsername(),
                 userDetails.getEmail(), roles));
@@ -127,6 +129,8 @@ public class AuthController {
         user.setRoles(roles);
         authService.saveNewUser(user);
 
+
+
         return ResponseEntity.ok(new MessageResponse("User registered successfully"));
 
     }
@@ -135,6 +139,15 @@ public class AuthController {
     public ResponseEntity<?> logoutUser() {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body(new MessageResponse(" signed out"));
+    }
+
+    @PostMapping("/api/auth/confirmemail")
+    public ConfrimEmailResponse confirmEmail(@RequestBody  SignupRequest signupRequest) {
+        ConfrimEmailResponse response = new ConfrimEmailResponse();
+        userDetailsService.sendConfirmationEmail(signupRequest);
+        response.setMessage("Email is sent successfully");
+        response.setUserData(signupRequest);
+        return response;
     }
 
 

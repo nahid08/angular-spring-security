@@ -12,13 +12,14 @@ import { HomeModule } from './home/home.module';
 import { RegistrationModule } from './registration/registration.module';
 import { CommonModule } from '@angular/common';
 import { DialogBoxModule } from './dialogBox/dialogBox.module';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
 import { urlProvider } from './utils/token/config';
 import { SocketIoConfig } from 'ngx-socket-io';
 import { SocketIoModule } from 'ngx-socket-io';
 import { ProfileModule } from './profile/profile.module';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { FormlyModule } from '@ngx-formly/core';
+import { ConfirmUserComponent } from './confirm-user/confirm-user.component';
 
 
 @NgModule({
@@ -38,7 +39,6 @@ import { FormlyModule } from '@ngx-formly/core';
     RegistrationModule, 
     DialogBoxModule,
     MatProgressSpinnerModule,
-
 
   ],
   providers: [httpInterceptorsProviders, urlProvider],

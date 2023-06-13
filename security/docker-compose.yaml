@@ -1,0 +1,35 @@
+version: '3'
+services:
+  server:
+    image: docker.io/library/server:latest
+    restart: always
+    ports:
+      - "90:9000"
+    environment:
+      - spring.datasource.url=jdbc:mysql://db:3306/testdb?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    networks:
+      - docker-network-1
+    depends_on:
+      - db
+  
+
+  db:
+     image: mysql
+     restart: always
+     networks:
+         - docker-network-1
+     expose:
+       - 3306
+     environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=testdb
+      - MYSQL_PASSWORD=1234
+     volumes:
+      - docker-volume-5:/home/node/app
+
+networks:
+    docker-network-1:
+
+
+volumes:
+    docker-volume-5:

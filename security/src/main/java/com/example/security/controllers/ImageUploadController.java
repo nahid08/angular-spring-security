@@ -56,4 +56,9 @@ public class ImageUploadController {
         }
         return res;
     }
+
+    @GetMapping("/sms/send")
+    public String sendSms() {
+        return "ok";
+    }
 }

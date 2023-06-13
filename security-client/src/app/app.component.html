@@ -15,7 +15,7 @@
 
 <router-outlet></router-outlet>
 
-<ng-container *ngIf="spinnerService.visibilty | async">
+<ng-container *ngIf="spinnerService.visibilty | async ">
 <ng-container *ngTemplateOutlet="loadingTemp"></ng-container>
 </ng-container>
 

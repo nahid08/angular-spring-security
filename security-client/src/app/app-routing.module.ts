@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AdminRoleGuard } from './utils/auth/AdminRoleGuard';
 import { AuthGuard } from './utils/auth/auth';
+import { ConfirmUserComponent } from './confirm-user/confirm-user.component';
 
 const routes: Routes = [
   { path: 'home',component: HomeComponent},
@@ -19,8 +20,9 @@ const routes: Routes = [
   {path: 'register', component: RegistrationComponent},
   {path: 'mod', component: BoardModeratorComponent, canActivate: [AuthGuard]},
   {path: 'admin', component: BoardAdminComponent, canActivate: [AuthGuard, AdminRoleGuard]},
+  {path: 'authenticate', component: ConfirmUserComponent},
    {path: '', redirectTo: 'home', pathMatch: 'full'},
-
+ 
 ];
 
 @NgModule({
