@@ -1,7 +1,10 @@
 package com.example.security.controllers;
 
 
+import com.example.security.dto.BaseDTO;
 import com.example.security.dto.ConfrimEmailResponse;
+import com.example.security.dto.ForgetPasswordRequestDTO;
+import com.example.security.dto.PasswordChangeRequestDTO;
 import com.example.security.model.ERole;
 import com.example.security.model.Role;
 import com.example.security.model.User;
@@ -80,7 +83,7 @@ public class AuthController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setAccessControlAllowOrigin("http://localhost:4200");
 
-        emailService.processEmail(loginRequest.getUsername());
+//        emailService.processEmail(loginRequest.getUsername());
 
 
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(new UserInfoResponse(userDetails.getId(), userDetails.getUsername(),
@@ -148,6 +151,23 @@ public class AuthController {
         response.setMessage("Email is sent successfully");
         response.setUserData(signupRequest);
         return response;
+    }
+
+    @PostMapping("/api/auth/forgetpassword")
+    public BaseDTO forgetPassword(@RequestBody ForgetPasswordRequestDTO forgetPasswordRequestDTO) {
+        BaseDTO res = new BaseDTO();
+        userDetailsService.resetPassword(forgetPasswordRequestDTO.getEmail());
+        res.setMessage("All is Ok");
+        return res;
+    }
+
+    @PostMapping("/api/auth/changepassword")
+    public BaseDTO changePassword(@RequestBody PasswordChangeRequestDTO passwordChangeRequestDTO) {
+        BaseDTO res = new BaseDTO();
+        userDetailsService.processChangePassword(passwordChangeRequestDTO, encoder);
+        res.setMessage("Password is changed successsfully.");
+        return res;
+
     }
 
 
