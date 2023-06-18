@@ -33,7 +33,15 @@ export class AuthService {
         return this.http.post(this.urlObj.url + 'signout', {}, httpOptions);
     }
 
-    confirmEmail(username: string, email: string, password: string, role: string[]): Observable<any> {
+    confirmEmail(username: string, email: string, password: string, role: string[]) {
         return this.http.post(this.urlObj.url + 'confirmemail', {username, email, password, role}, httpOptions);
+    }
+
+    forgetPassword(email: string) {
+        return this.http.post(this.urlObj.url + 'forgetpassword', {email}, httpOptions);
+    }
+
+    changePassword(password: string, token: string) {
+        return this.http.post(this.urlObj.url+'changepassword', {password, token})
     }
 }

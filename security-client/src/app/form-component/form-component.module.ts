@@ -1,13 +1,10 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { AbstractControl, FormsModule, ReactiveFormsModule, ValidationErrors } from "@angular/forms";
-import { RegistrationComponent } from "./registration.component";
-import {MatSelectModule} from '@angular/material/select';
-import { FormlyBootstrapModule } from "@ngx-formly/bootstrap";
-import { FormlyFieldConfig, FormlyModule } from "@ngx-formly/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormComponentComponent } from "./form-component.component";
+import { FormlyModule } from "@ngx-formly/core";
 import { emailValidator, minValidationMessage, emailValidationMessage, passwordValidator, passwordValidationMessage } from "../utils/validation/registration.validation";
-import { FormComponentModule } from "../form-component/form-component.module";
-
+import { FormlyBootstrapModule } from "@ngx-formly/bootstrap";
 
 
 
@@ -26,11 +23,14 @@ import { FormComponentModule } from "../form-component/form-component.module";
             ]
         }),
         FormlyBootstrapModule,
-        FormComponentModule
+      
     ],
     declarations: [
-        RegistrationComponent
+        FormComponentComponent
+    ],
+    exports: [
+        FormComponentComponent
     ]
 })
 
-export class RegistrationModule{};
+export class FormComponentModule{};

@@ -48,5 +48,9 @@ export class AppComponent implements OnInit {
     })
   }
 
+  hideNav() {
+    return this.commonService.router.url.includes("home") || this.commonService.router.url.includes("profile");
+  }
+
 
 }

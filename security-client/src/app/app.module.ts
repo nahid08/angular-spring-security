@@ -20,6 +20,10 @@ import { ProfileModule } from './profile/profile.module';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { FormlyModule } from '@ngx-formly/core';
 import { ConfirmUserComponent } from './confirm-user/confirm-user.component';
+import { AdminComponent } from './admin/admin.component';
+import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
+import { ForgetPasswordModule } from './forgetpassword/forgetpassword.module';
+import { ResetPasswordModule } from './resetpassword/resetpassword.module';
 
 
 @NgModule({
@@ -39,6 +43,9 @@ import { ConfirmUserComponent } from './confirm-user/confirm-user.component';
     RegistrationModule, 
     DialogBoxModule,
     MatProgressSpinnerModule,
+    FormsModule,
+    ForgetPasswordModule,
+    ResetPasswordModule
 
   ],
   providers: [httpInterceptorsProviders, urlProvider],

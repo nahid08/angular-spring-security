@@ -1,5 +1,5 @@
 
-<div class="container-fluid text-center " >
+<div class="container-fluid text-center bg-secondary d-flex flex-column justify-content-center" style="height: 100%;" >
 <!-- 
     <div class="row pt-3">
         <div class="col">
@@ -56,12 +56,22 @@
         </div>
     </div> -->
 
+    <div class="row">
+        <div class="col">
+            <h1>Registration</h1>
+        </div>
+    </div>
+
     <div class="row justify-content-center mt-3">
         <div class="col-6">
-            <form [formGroup]="form" (ngSubmit)="confirmEmail(model)">
+            <!-- <form [formGroup]="form" (ngSubmit)="onSubmit(model)">
                 <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
                 <button type="submit" class="btn-primary"> Submit</button>
-            </form>
+            </form> -->
+
+            <app-form-component (onOkClicked)="onSubmit($event)" [fields]="fields" [model]="model" >
+                <button type="submit" class="btn-primary"> Submit</button>
+            </app-form-component>
         
         </div>
 

@@ -95,6 +95,7 @@ export class RegistrationComponent implements OnInit {
     this.username = model.name;
     this.email = model.email
     this.password = model.password;
+    this.role = model.role;
 
     this.authService.register(this.username, this.email, this.password, this.role).subscribe({
       next: data => {
@@ -116,7 +117,7 @@ export class RegistrationComponent implements OnInit {
     this.email = model.email;
     this.password = model.password;
 
-    this.authService.confirmEmail(this.username, this.email, this.password, this.role).subscribe({});
+    // this.authService.confirmEmail(this.username, this.email, this.password, this.role).subscribe({});
   }
 
 }

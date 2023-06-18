@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { DialogBoxService } from "./dialogBox/dialogBox.service";
 
 
@@ -11,9 +11,10 @@ export class CommonService {
 
     router: Router;
     dialogBoxService: DialogBoxService;
-    constructor(router: Router, dialogBoxService: DialogBoxService) {
+    activatedRoute: ActivatedRoute;
+    constructor(router: Router, dialogBoxService: DialogBoxService, activatedRoute: ActivatedRoute) {
         this.router = router;
         this.dialogBoxService = dialogBoxService;
-        
+        this.activatedRoute = activatedRoute;
     }
 }
