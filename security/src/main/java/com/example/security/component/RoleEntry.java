@@ -2,7 +2,9 @@ package com.example.security.component;
 
 import com.example.security.model.ERole;
 import com.example.security.model.Role;
+import com.example.security.model.Student;
 import com.example.security.repository.RoleRepository;
+import com.example.security.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -18,6 +20,9 @@ public class RoleEntry implements CommandLineRunner {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    StudentRepository studentRepository;
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Testing Component annotation");
@@ -30,6 +35,12 @@ public class RoleEntry implements CommandLineRunner {
                 roleRepository.save(new Role(role));
             }
         });
+
+        Student student = new Student("nahid", "John Doe", Student.Gender.MALE, 1);
+
+        studentRepository.save(student);
+
+
 
     }
 }

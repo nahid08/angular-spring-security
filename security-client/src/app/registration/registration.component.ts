@@ -82,13 +82,15 @@ export class RegistrationComponent implements OnInit {
   ]
 
 
-  constructor(private authService: AuthService, private storageService: StorageService, private commonService: CommonService) {};
-
-  ngOnInit(): void {
+  constructor(private authService: AuthService, private storageService: StorageService, private commonService: CommonService) {
     if(this.storageService.isLoggedIn()) {
       this.commonService.router.navigate(['/profile']);
 
     }
+  };
+
+  ngOnInit(): void {
+ 
   }
 
   onSubmit(model: any): void {

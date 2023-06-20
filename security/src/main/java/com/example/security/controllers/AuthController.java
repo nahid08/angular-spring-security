@@ -18,6 +18,7 @@ import com.example.security.security.jwt.JwtUtils;
 import com.example.security.services.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +27,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -38,7 +36,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
-
+@EnableCaching
 //@RequestMapping("/api/auth")
 public class AuthController {
 
@@ -157,7 +155,7 @@ public class AuthController {
     public BaseDTO forgetPassword(@RequestBody ForgetPasswordRequestDTO forgetPasswordRequestDTO) {
         BaseDTO res = new BaseDTO();
         userDetailsService.resetPassword(forgetPasswordRequestDTO.getEmail());
-        res.setMessage("All is Ok");
+        res.setMessage("Please check your to change your password.");
         return res;
     }
 
@@ -168,6 +166,14 @@ public class AuthController {
         res.setMessage("Password is changed successsfully.");
         return res;
 
+    }
+
+    @GetMapping("/api/auth/getalluser")
+    public List<User> getAllUser() {
+
+        System.out.println("Redis");
+        List<User> userList = userDetailsService.getALlUser();
+        return userList;
     }
 
 
