@@ -1,5 +1,5 @@
 
-<nav *ngIf="hideNav()" class="navbar navbar-expand navbar-dark nav-color ">
+<nav  class="navbar navbar-expand navbar-dark nav-color ">
     <div class="container">
         <a class="navbar-brand">Angular Spring Security</a>
         <ul class="nav navbar-nav collapse navbar-collapse" routerLinkActive="active">
@@ -7,7 +7,11 @@
             <li class="nav-item"><a class="nav-link" routerLink="profile">Profile</a></li>
         </ul>   
         <div>
-            <button (click)="doLogOut()" class="form-control but-color btn-primary">Log Out</button>
+            <ul *ngIf="!storageService.isLoggedIn()" class="nav navbar-nav collapse navbar-collapse" routerLinkActive="active">
+                <li class="nav-item"><a class="nav-link" routerLink="login">Login</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="register">Registration</a></li>
+            </ul>  
+            <button *ngIf="storageService.isLoggedIn()" (click)="doLogOut()" class="form-control but-color btn-primary">Log Out</button>
         </div>    
     </div>
 </nav>

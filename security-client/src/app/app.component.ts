@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   showModeratorBoard: boolean = false;
   username?: string;
 
-  constructor(private storageService: StorageService, private authService: AuthService,private commonService: CommonService,
+  constructor(public storageService: StorageService, private authService: AuthService,private commonService: CommonService,
     public spinnerService: SpinnerService) {};
 
   ngOnInit(): void {
@@ -48,9 +48,9 @@ export class AppComponent implements OnInit {
     })
   }
 
-  hideNav() {
-    return this.commonService.router.url.includes("home") || this.commonService.router.url.includes("profile");
-  }
+  // hideNav() {
+  //   return this.commonService.router.url.includes("home") || this.commonService.router.url.includes("profile");
+  // }
 
 
 }
