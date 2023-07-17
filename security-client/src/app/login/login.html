@@ -1,12 +1,19 @@
 <div class="container d-flex flex-column justify-content-center" (keyup.enter)="onSubmit()"  style="height: 100%;">
         <div class="row d-flex flex-row justify-content-center " style="padding-bottom: 20px;">
-            <label class="col-sm-1">Name</label>
-             <input type="text" class="col-sm-4" [(ngModel)]="username">
-             </div>
+             <label class="col-sm-1">Name</label>
+             <input type="text" class="col-sm-4 " [(ngModel)]="username">
+         </div>
              
-             <div class="row d-flex flex-row justify-content-center" style="padding:1px;">
-                 <label class="col-sm-1">Password</label>
-                 <input class="col-sm-4" type="password" [(ngModel)]="password">
+             <div class="row d-flex flex-row justify-content-center g-0" style="padding:1px;">
+                <div class="col-sm-1">   
+                    <label >Password</label>
+                </div>
+              
+                 <div class="col-sm-4 d-flex flex-row justify-content-end" >                   
+                    <input class="form-control"  type={{passwordFormat}} [(ngModel)]="password" maxlength="20">
+                    <i class="fa fa-eye py-2 eye-style" (click)="changePassFormat()" [ngStyle]="{'color': (passwordFormat =='password') ? '#000000' : '#ff0000'}" aria-hidden="true" style="position: absolute;" ></i>
+                 </div>
+                
              </div>
            <div class="row d-flex flex-row justify-content-center">
             <div class="col text-center pt-3">
@@ -25,5 +32,6 @@
                 <a routerLink="/forgetpassword">Forget your password </a>
             </div>
            </div>
+         
   
 </div>

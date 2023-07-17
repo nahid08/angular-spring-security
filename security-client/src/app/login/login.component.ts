@@ -9,7 +9,7 @@ import { StorageService } from "../service/storage.service";
 @Component({
     selector: 'login',
     templateUrl: './login.html',
-    styleUrls: []
+    styleUrls: ['./login.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     isLoginFailed: boolean = false;
     errorMessage: boolean = false;
     roles: string[] = [];
+    passwordFormat: string = "password"
 
     constructor(private authService: AuthService, private storageService: StorageService,
         private commonService: CommonService) {};
@@ -72,6 +73,12 @@ export class LoginComponent implements OnInit {
    reloadPage(): void {
     this.commonService.router.navigate(['/profile']);
     
+   }
+
+   changePassFormat(): void {
+
+    this.passwordFormat = this.passwordFormat === "password" ? "text" : "password";
+
    }
 
 

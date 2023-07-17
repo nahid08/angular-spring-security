@@ -55,6 +55,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   doUpload() {
+    this.closeModal();
     if(this.file) {
       this.fileService.imageUplad(this.file, this.currentUser.username + ".jpg", this.currentUser.id).subscribe(data => {
         if(data.message) {
@@ -107,9 +108,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 
   sendSms() {
-
     this.extService.sendSms().subscribe(data => {
-      alert("Sms is send successfully");
+      alert("Sms is sent successfully");
     })
 
   }

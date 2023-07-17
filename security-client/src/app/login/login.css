@@ -1,0 +1,11 @@
+.eye-style {
+    margin-right: 10px !important;
+}
+
+.eye-style:hover {
+    cursor: pointer;
+}
+
+.form-control {
+    box-shadow: none;
+}
