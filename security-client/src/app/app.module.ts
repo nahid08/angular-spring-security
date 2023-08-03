@@ -14,16 +14,10 @@ import { CommonModule } from '@angular/common';
 import { DialogBoxModule } from './dialogBox/dialogBox.module';
 import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
 import { urlProvider } from './utils/token/config';
-import { SocketIoConfig } from 'ngx-socket-io';
-import { SocketIoModule } from 'ngx-socket-io';
-import { ProfileModule } from './profile/profile.module';
-import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
-import { FormlyModule } from '@ngx-formly/core';
-import { ConfirmUserComponent } from './confirm-user/confirm-user.component';
-import { AdminComponent } from './admin/admin.component';
-import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
 import { ForgetPasswordModule } from './forgetpassword/forgetpassword.module';
 import { ResetPasswordModule } from './resetpassword/resetpassword.module';
+import { ChartModule } from './chart/chart.module';
+import { ProfileModule } from './confirm-user/confirm-user-module';
 
 
 @NgModule({
@@ -45,7 +39,9 @@ import { ResetPasswordModule } from './resetpassword/resetpassword.module';
     MatProgressSpinnerModule,
     FormsModule,
     ForgetPasswordModule,
-    ResetPasswordModule
+    ResetPasswordModule,
+    ChartModule,
+    
 
   ],
   providers: [httpInterceptorsProviders, urlProvider],

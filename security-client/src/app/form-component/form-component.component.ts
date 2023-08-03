@@ -12,7 +12,6 @@ export class FormComponentComponent {
      @Input() fields : FormlyFieldConfig[] = [];
      @Input() model: any;
      @Input() form: any;
-    // form = new FormGroup({});
      @Output() onOkClicked = new EventEmitter<any>();
 
      onSubmit( model: any) {

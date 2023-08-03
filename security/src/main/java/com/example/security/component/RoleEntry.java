@@ -2,7 +2,6 @@ package com.example.security.component;
 
 import com.example.security.model.ERole;
 import com.example.security.model.Role;
-import com.example.security.model.Student;
 import com.example.security.repository.RoleRepository;
 import com.example.security.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +35,10 @@ public class RoleEntry implements CommandLineRunner {
             }
         });
 
-        Student student = new Student("nahid", "John Doe", Student.Gender.MALE, 1);
-
-        studentRepository.save(student);
-
+//        Student student = new Student("nahid", "John Doe", Student.Gender.MALE, 1);
+//
+//        studentRepository.save(student);
+//
 
 
     }
