@@ -31,4 +31,8 @@ export class FileService {
     getImageFromS3(fileId: number) {
         return this.http.get<any>(FILE_API + "fetch",  {params: {fileId}})
     }
+
+    pdfDownLoad() {
+        return this.http.get("http://localhost:9000/pdf/download", {responseType: 'blob'});
+    }
 }

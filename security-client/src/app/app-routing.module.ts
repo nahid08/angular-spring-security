@@ -12,6 +12,7 @@ import { AuthGuard } from './utils/auth/auth';
 import { ConfirmUserComponent } from './confirm-user/confirm-user.component';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { ChartComponent } from './chart/chart.component';
 
 const routes: Routes = [
   { path: 'home',component: HomeComponent},
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path: 'authenticate', component: ConfirmUserComponent},
    {path: '', redirectTo: 'home', pathMatch: 'full'},
    {path: 'forgetpassword', component: ForgetpasswordComponent},
-   {path: 'resetpassword', component: ResetpasswordComponent}
+   {path: 'resetpassword', component: ResetpasswordComponent},
+   {path: 'chart', component: ChartComponent, canActivate: [AuthGuard]}
  
 ];
 

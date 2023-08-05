@@ -114,5 +114,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   }
 
+  downloadInfo() {
+    this.fileService.pdfDownLoad().subscribe((data) => {
+
+      let blobData = new Blob([data], {type: "application/pdf"});
+      let url = window.URL.createObjectURL(blobData);
+      window.open(url)
+
+    });
+  }
+
 
 }

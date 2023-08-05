@@ -1,4 +1,12 @@
 <div class="container-fluid">
+
+    <div class="row">
+        <div class="col pt-3">
+            <button (click)="downloadInfo()">Download Profile Information</button>
+        </div>
+
+   </div>
+
     <div class="row pt-5">
         <div class="col">
             <h1 class="text-center">Profile of {{currentUser.username}} works !!</h1>
@@ -44,7 +52,7 @@
 
 <!-- Modal -->
 <!-- [ngStyle]="{'display': displayModal}" -->
-<div class="modal" id="exampleModal"    tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal" id="exampleModal" style="display: `${displayModal}`;"   tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header  text-center">
@@ -72,5 +80,5 @@
       </div>
     </div>
   </div>
-
+ -->
 
