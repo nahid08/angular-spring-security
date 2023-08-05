@@ -81,6 +81,9 @@ public class AuthController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setAccessControlAllowOrigin("http://localhost:4200");
 
+        userDetailsService.setUser(loginRequest.getUsername());
+
+
 //        emailService.processEmail(loginRequest.getUsername());
 
 

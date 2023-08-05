@@ -8,6 +8,7 @@ import com.example.security.dto.UploadResponseDTO;
 import com.example.security.repository.Itemrepository;
 import com.example.security.services.MetaDataServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,6 +44,7 @@ public class ImageUploadController {
 
 
     @GetMapping("/profile/image/fetch")
+    @Secured("MODERATOR")
     public  FetchResponseDTO fetch(@RequestParam("fileId") int fileId) throws IOException {
         String response = null;
         FetchResponseDTO res = new FetchResponseDTO();

@@ -14,6 +14,7 @@ const httpOptions = {
 }
 
 
+
 @Injectable({
     providedIn: 'root'
 })
@@ -29,7 +30,7 @@ export class FileService {
     }
 
     getImageFromS3(fileId: number) {
-        return this.http.get<any>(FILE_API + "fetch",  {params: {fileId}})
+        return this.http.get<any>(FILE_API + "fetch",  {params: {fileId}, headers: httpOptions.headers},);
     }
 
     pdfDownLoad() {

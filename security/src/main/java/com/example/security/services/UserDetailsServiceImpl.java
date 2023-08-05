@@ -38,6 +38,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     ConfirmationTokenRepository confirmationTokenRepository;
 
+    @Autowired
+    UserInfo userInfo;
+
 
 
     @Override
@@ -96,6 +99,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public List<User> getALlUser () {
         List<User> siers = userRepository.findAll();
         return siers;
+    }
+
+
+    public  void setUser(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if(user.isPresent()) {
+            userInfo.setUser(user.get());
+        }
     }
 
 
