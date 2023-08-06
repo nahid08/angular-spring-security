@@ -3,8 +3,10 @@ package com.example.security.services;
 import com.example.security.dto.PasswordChangeRequestDTO;
 import com.example.security.model.ConfirmationToken;
 import com.example.security.model.User;
+import com.example.security.model.UserDetail;
 import com.example.security.payload.request.SignupRequest;
 import com.example.security.repository.ConfirmationTokenRepository;
+import com.example.security.repository.UserDetailRepository;
 import com.example.security.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +20,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -40,6 +43,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     UserInfo userInfo;
+
+    @Autowired
+    UserDetailRepository userDetailRepository;
 
 
 
@@ -107,6 +113,29 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(user.isPresent()) {
             userInfo.setUser(user.get());
         }
+    }
+
+    public void setUserActivity() {
+
+        User user = userInfo.getUser();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMMM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat ldf = new SimpleDateFormat("yyyy-MMMM-dd HH:mm:ss");
+
+        Date d1 = new Date();
+       try {
+           d1 = ldf.parse(sdf.format(new Date()));
+       } catch (Exception e) {
+
+       }
+
+       UserDetail userDetail = new UserDetail(d1, user);
+
+       userDetailRepository.save(userDetail);
+
+
+
     }
 
 

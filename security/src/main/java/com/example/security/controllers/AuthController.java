@@ -70,25 +70,38 @@ public class AuthController {
     @PostMapping("/api/auth/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        UserDetailsImpl userDetails = null;
+        ResponseCookie jwtCookie = null;
+        List<String> roles = null;
+        boolean isLoginFailed = false;
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+       try {
+           Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+           SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
+           userDetails = (UserDetailsImpl) authentication.getPrincipal();
+           jwtCookie = jwtUtils.generateJwtCookie(userDetails);
 
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setAccessControlAllowOrigin("http://localhost:4200");
+           roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
 
-        userDetailsService.setUser(loginRequest.getUsername());
+           HttpHeaders httpHeaders = new HttpHeaders();
+           httpHeaders.setAccessControlAllowOrigin("http://localhost:4200");
 
+           userDetailsService.setUser(loginRequest.getUsername());
+           userDetailsService.setUserActivity();
 
-//        emailService.processEmail(loginRequest.getUsername());
+       } catch (Exception e) {
 
+           isLoginFailed = true;
+       }
 
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(new UserInfoResponse(userDetails.getId(), userDetails.getUsername(),
+       if(isLoginFailed) {
+           return ResponseEntity.badRequest().body(new BaseDTO("Invalid Username or Password."));
+       }
+
+        return  ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(new UserInfoResponse(userDetails.getId(), userDetails.getUsername(),
                 userDetails.getEmail(), roles));
+
 
     }
 

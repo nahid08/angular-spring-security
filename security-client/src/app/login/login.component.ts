@@ -53,9 +53,9 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.username, this.password).pipe(
         catchError((err) => {
-            this.errorMessage = err.message;
+            this.errorMessage = err.error.message;
             this.isLoginFailed = true;
-            this.commonService.dialogBoxService.open({title: 'Error', message: err.message})
+            this.commonService.dialogBoxService.open({title: 'Error', message: this.errorMessage})
             return of("");
         })
     ).subscribe((data) => {
