@@ -13,6 +13,7 @@ import { ConfirmUserComponent } from './confirm-user/confirm-user.component';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { ChartComponent } from './chart/chart.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const routes: Routes = [
   { path: 'home',component: HomeComponent},
@@ -27,7 +28,8 @@ const routes: Routes = [
    {path: '', redirectTo: 'home', pathMatch: 'full'},
    {path: 'forgetpassword', component: ForgetpasswordComponent},
    {path: 'resetpassword', component: ResetpasswordComponent},
-   {path: 'chart', component: ChartComponent, canActivate: [AuthGuard]}
+   {path: 'chart', component: ChartComponent, canActivate: [AuthGuard]},
+   {path: 'admin/users', component: UserListComponent, canActivate: [AdminRoleGuard]}
  
 ];
 
