@@ -3,7 +3,7 @@ package com.example.security.controllers;
 
 import com.example.security.dto.UserDetailListResponseDTO;
 import com.example.security.model.UserDetail;
-import com.example.security.repository.UserDetailRepository;
+import com.example.security.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +17,12 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    UserDetailRepository userDetailRepository;
+    AdminService adminService;
 
     @GetMapping("/admin/allusers")
     public UserDetailListResponseDTO getAllUsers() {
         UserDetailListResponseDTO response = new UserDetailListResponseDTO();
-        List<UserDetail> res =  userDetailRepository.findAll();
+        List<UserDetail> res =  adminService.findAllUsersDetail();
         response.setUserDetailList(res);
         return response;
     }

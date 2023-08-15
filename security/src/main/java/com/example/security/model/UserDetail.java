@@ -10,6 +10,7 @@ public class UserDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_detail_id")
     private Long userDetailId;
 
     @Column(name = "last_logged_in")
@@ -17,7 +18,7 @@ public class UserDetail {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     Date lastLoggedIn;
 
-    @Column(name = "last_looged_out")
+    @Column(name = "last_logged_out")
 //    @JsonSerialize(using = CustomDateSerializer.class)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     Date lastLoggedOut;

@@ -41,6 +41,11 @@ export class UserListComponent extends CommonController implements OnInit {
              this.commonService.dialogBoxService.open({title: 'Error', message: data.message }) 
             } else {
 
+               let results: any[] = data.userDetailList;
+               results.forEach(item => {
+                  item.username = item.user.username;
+                  item.email = item.user.email;
+               })
                this.dataSource = data.userDetailList;
                this.tab?.renderRows();
                
