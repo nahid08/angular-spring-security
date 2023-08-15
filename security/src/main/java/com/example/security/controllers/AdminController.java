@@ -1,6 +1,7 @@
 package com.example.security.controllers;
 
 
+import com.example.security.dto.UserDetailListResponseDTO;
 import com.example.security.model.UserDetail;
 import com.example.security.repository.UserDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,10 @@ public class AdminController {
     UserDetailRepository userDetailRepository;
 
     @GetMapping("/admin/allusers")
-    public List<UserDetail> getAllUsers() {
+    public UserDetailListResponseDTO getAllUsers() {
+        UserDetailListResponseDTO response = new UserDetailListResponseDTO();
         List<UserDetail> res =  userDetailRepository.findAll();
-        return res;
+        response.setUserDetailList(res);
+        return response;
     }
 }

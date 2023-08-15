@@ -23,13 +23,13 @@ const routes: Routes = [
   {path: 'user', component: BoardUserComponent, canActivate: [AuthGuard]},
   {path: 'register', component: RegistrationComponent},
   {path: 'mod', component: BoardModeratorComponent, canActivate: [AuthGuard]},
-  {path: 'admin', component: BoardAdminComponent, canActivate: [AuthGuard, AdminRoleGuard]},
+  {path: 'admin', component: BoardAdminComponent, canActivate: [AuthGuard, AdminRoleGuard], pathMatch: 'full'},
   {path: 'authenticate', component: ConfirmUserComponent},
    {path: '', redirectTo: 'home', pathMatch: 'full'},
    {path: 'forgetpassword', component: ForgetpasswordComponent},
    {path: 'resetpassword', component: ResetpasswordComponent},
    {path: 'chart', component: ChartComponent, canActivate: [AuthGuard]},
-   {path: 'admin/users', component: UserListComponent, canActivate: [AdminRoleGuard]}
+   {path: 'admin/users', component: UserListComponent,pathMatch: 'full'}
  
 ];
 

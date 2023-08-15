@@ -27,7 +27,6 @@ export class UserListComponent extends CommonController implements OnInit {
      }];
 
 
-   //   displayedColumns: string[] = ['userDetailId', 'lastLoggedIn', 'lastLoggedOut'];
      columnsToDisplay: string[] = ['userDetailId', 'lastLoggedIn', 'lastLoggedOut'];
 
      colums: string[] = ['userDetailId', 'lastLoggedIn', 'lastLoggedOut']
@@ -42,7 +41,7 @@ export class UserListComponent extends CommonController implements OnInit {
              this.commonService.dialogBoxService.open({title: 'Error', message: data.message }) 
             } else {
 
-               this.dataSource = data;
+               this.dataSource = data.userDetailList;
                this.tab?.renderRows();
                
 

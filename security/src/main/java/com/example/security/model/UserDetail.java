@@ -1,8 +1,9 @@
 package com.example.security.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
-import  java.util.Date;
+import java.util.Date;
 @Entity
 @Table(name = "user_detail")
 public class UserDetail {
@@ -12,8 +13,13 @@ public class UserDetail {
     private Long userDetailId;
 
     @Column(name = "last_logged_in")
+//    @JsonSerialize(using = CustomDateSerializer.class)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     Date lastLoggedIn;
 
+    @Column(name = "last_looged_out")
+//    @JsonSerialize(using = CustomDateSerializer.class)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     Date lastLoggedOut;
 
 
