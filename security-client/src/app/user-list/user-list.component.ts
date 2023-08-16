@@ -1,8 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonController } from '../CommonController';
 import { AdminService } from '../service/admin.service';
 import { CommonService } from '../CommonService';
-import {MatTable, MatTableModule} from '@angular/material/table';
+import {MatTable, MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 
 
 @Component({
@@ -10,11 +11,12 @@ import {MatTable, MatTableModule} from '@angular/material/table';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent extends CommonController implements OnInit {
+export class UserListComponent extends CommonController implements OnInit, AfterViewInit  {
 
     @ViewChild("table") tab: MatTable<any> | undefined;
+    @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
-     dataSource: any = [];
+     dataSource = new MatTableDataSource<any>([]);;
      displayedColumns: any[] = [{
          caption: 'Id',
          data: 'userDetailId'
@@ -24,34 +26,47 @@ export class UserListComponent extends CommonController implements OnInit {
      }, {
       caption: 'Last Logged Out',
       data: 'lastLoggedOut'
-     }];
+     }, {
+      caption: 'Username',
+      data: 'username'
+     },{
+      caption: 'Email',
+      data: 'email'
+     } 
+      ];
 
 
-     columnsToDisplay: string[] = ['userDetailId', 'lastLoggedIn', 'lastLoggedOut'];
+     columnsToDisplay: string[] = ['userDetailId', 'lastLoggedIn', 'lastLoggedOut','username', 'email'];
 
-     colums: string[] = ['userDetailId', 'lastLoggedIn', 'lastLoggedOut']
+     colums: string[] = ['userDetailId', 'lastLoggedIn', 'lastLoggedOut', 'username', 'email']
 
      constructor(private adminService: AdminService, private commonService: CommonService) {
         super();
      };
 
      ngOnInit(): void {
-         this.adminService.getAllUser().subscribe((data:any) => {
-           if(data?.message) {
-             this.commonService.dialogBoxService.open({title: 'Error', message: data.message }) 
-            } else {
+    
+     }
 
-               let results: any[] = data.userDetailList;
-               results.forEach(item => {
-                  item.username = item.user.username;
-                  item.email = item.user.email;
-               })
-               this.dataSource = data.userDetailList;
-               this.tab?.renderRows();
-               
+     ngAfterViewInit(): void {
+      this.adminService.getAllUser().subscribe((data:any) => {
+         if(data?.message) {
+           this.commonService.dialogBoxService.open({title: 'Error', message: data.message }) 
+          } else {
 
-            }
-         })
+             let results: any[] = data.userDetailList;
+             results.forEach(item => {
+                item.username = item.user.username;
+                item.email = item.user.email;
+             })
+             this.dataSource.data = results;
+             this.dataSource.paginator = this.paginator as any;
+             this.tab?.renderRows();
+             
+          }
+       })
+       
+        
      }
 
      

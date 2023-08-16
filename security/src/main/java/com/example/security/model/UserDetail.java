@@ -24,8 +24,8 @@ public class UserDetail {
     Date lastLoggedOut;
 
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_user")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user", nullable = true)
     private User user;
 
     public UserDetail() {

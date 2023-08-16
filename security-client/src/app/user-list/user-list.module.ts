@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { UserListComponent } from "./user-list.component";
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -11,7 +12,7 @@ import {MatTableModule} from '@angular/material/table';
         FormsModule,
         CommonModule,
         MatTableModule,
-
+        MatPaginatorModule
     ],
     declarations: [
         UserListComponent

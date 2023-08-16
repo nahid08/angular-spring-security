@@ -21,7 +21,7 @@ import { ProfileModule } from './confirm-user/confirm-user-module';
 import { UserListComponent } from './user-list/user-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { UserListModule } from './user-list/user-list.module';
-
+import  {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -44,8 +44,8 @@ import { UserListModule } from './user-list/user-list.module';
     ResetPasswordModule,
     ChartModule,
     MatTableModule,
-    UserListModule
-    
+    UserListModule,
+    BrowserAnimationsModule
 
   ],
   providers: [httpInterceptorsProviders, urlProvider],
