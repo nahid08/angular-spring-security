@@ -88,7 +88,7 @@ public class AuthController {
            httpHeaders.setAccessControlAllowOrigin("http://localhost:4200");
 
            userDetailsService.setUser(loginRequest.getUsername());
-           userDetailsService.setUserActivity();
+           userDetailsService.setUserSignInActivity();
 
        } catch (Exception e) {
 
@@ -155,6 +155,7 @@ public class AuthController {
     @PostMapping("/api/auth/signout")
     public ResponseEntity<?> logoutUser() {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
+        userDetailsService.setUserSignOutActivity();
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body(new MessageResponse(" signed out"));
     }
 

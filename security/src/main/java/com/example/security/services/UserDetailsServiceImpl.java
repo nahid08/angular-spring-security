@@ -8,6 +8,13 @@ import com.example.security.payload.request.SignupRequest;
 import com.example.security.repository.ConfirmationTokenRepository;
 import com.example.security.repository.UserDetailRepository;
 import com.example.security.repository.UserRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +53,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     UserDetailRepository userDetailRepository;
+
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
 
 
@@ -115,7 +126,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
     }
 
-    public void setUserActivity() {
+    public void setUserSignInActivity() {
 
         User user = userInfo.getUser();
 
@@ -133,6 +144,46 @@ public class UserDetailsServiceImpl implements UserDetailsService {
        UserDetail userDetail = new UserDetail(d1, user);
 
        userDetailRepository.save(userDetail);
+
+    }
+
+    public  void setUserSignOutActivity() {
+        User user = userInfo.getUser();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMMM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat ldf = new SimpleDateFormat("yyyy-MMMM-dd HH:mm:ss");
+
+        Date d1 = new Date();
+        try {
+            d1 = ldf.parse(sdf.format(new Date()));
+        } catch (Exception e) {
+
+        }
+
+
+
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<UserDetail> cq = cb.createQuery(UserDetail.class);
+
+        Root<UserDetail> root = cq.from(UserDetail.class);
+
+        cq.orderBy(cb.desc(root.get("lastLoggedIn")));
+
+        Predicate userIdPredicate = cb.equal(root.get("user"), user);
+
+        cq.where(userIdPredicate);
+
+        TypedQuery<UserDetail> query = entityManager.createQuery(cq);
+
+        UserDetail loggedOutUserDetail = query.getResultList().get(0);
+
+
+        loggedOutUserDetail.setLastLoggedOut(d1);;
+
+
+        userDetailRepository.save(loggedOutUserDetail);
 
 
 
