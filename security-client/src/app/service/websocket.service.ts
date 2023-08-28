@@ -1,41 +1,38 @@
-// import { Injectable } from "@angular/core";
-
-
-// export interface Document {
-//     name: string,
-//     message: string
-// }
-
+// import { Injectable } from '@angular/core';
 
 // @Injectable({
-//     providedIn: 'root'
+//   providedIn: 'root'
 // })
-// export class WebSocketService {
+// export class WebsocketService {
+//   private socket: WebSocket | undefined;
 
-//     stompClient: any;
-//     msg: any;
+//   constructor() { }
 
-//     constructor() {
-//         this.initializeWebSocketConnection();
-//     }
+//   connect(): void {
+//     this.socket = new WebSocket('ws://localhost:9000/app');
 
-//     initializeWebSocketConnection() {
-//         const serverUrl = 'http//localhost:8081/socket';
-//         var sock = new any('https://mydomain.com/my_prefix');
-//         this.stompClient = stompc.over(ws);
-//         const that = this;
-//         this.stompClient.connect({}, (frame: any) => {
-//             this.stompClient.subscribe('/message', (message: any) => {
-//                 if(message.body) {
-//                     that.msg.push(message.body);
-//                 }
-//             })
-//         })
-//     }
+//     this.socket.onopen = () => {
+//       console.log('WebSocket connection established.');
+//     };
 
+//     this.socket.onmessage = (event) => {
+//       console.log('Received message:', event.data);
+//     };
 
-//     sendMessage(message) {
-//         this.stompClient.send("/app/send/message", {}, message);
-//     }
+//     this.socket.onclose = (event) => {
+//       console.log('WebSocket connection closed:', event);
+//     };
 
+//     this.socket.onerror = (error) => {
+//       console.error('WebSocket error:', error);
+//     };
+//   }
+
+//   sendMessage(message: string): void {
+//     this.socket?.send(message);
+//   }
+
+//   closeConnection(): void {
+//     this.socket?.close();
+//   }
 // }

@@ -155,7 +155,7 @@ public class AuthController {
     @PostMapping("/api/auth/signout")
     public ResponseEntity<?> logoutUser() {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-        userDetailsService.setUserSignOutActivity();
+//        userDetailsService.setUserSignOutActivity();
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body(new MessageResponse(" signed out"));
     }
 

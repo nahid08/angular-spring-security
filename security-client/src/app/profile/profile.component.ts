@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { CommonService } from '../CommonService';
 import { AuthService } from '../service/auth.service';
 import { FileService } from '../service/file.service';
@@ -33,6 +33,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if(window.sessionStorage.getItem("imageUrl")) {
         this.imageUrl = window.sessionStorage.getItem("imageUrl") as string;
       }
+
+
+      this.commonService.rxStompService.watch("/topic/greetings").pipe(
+        map(res => JSON.parse(res.body)),
+        map((res : any) => res.content)
+      ).subscribe(message => {
+         this.commonService.dialogBoxService.open({title: 'Greetings', message: message})
+      }) 
     
   }
 
@@ -122,6 +130,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
       window.open(url)
 
     });
+  }
+
+  sendMessage() {
+      const message = "Hello Socket";
+      this.commonService.rxStompService.publish({destination: '/app/hello', body: JSON.stringify({'name': message})})
   }
 
 

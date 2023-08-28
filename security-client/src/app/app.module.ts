@@ -22,6 +22,8 @@ import { UserListComponent } from './user-list/user-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { UserListModule } from './user-list/user-list.module';
 import  {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { RxStompService } from './service/rx-stomp.service';
+import { rxStompServiceFactory } from './service/rx-stomp-service-factory';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,7 @@ import  {BrowserAnimationsModule} from '@angular/platform-browser/animations'
     BrowserAnimationsModule
 
   ],
-  providers: [httpInterceptorsProviders, urlProvider],
+  providers: [httpInterceptorsProviders, urlProvider, {provide: RxStompService, useFactory: rxStompServiceFactory}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

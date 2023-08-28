@@ -7,17 +7,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserInfo {
 
-    private  User user;
+    private  User user = new User();
 
     void setUser(User user) {
         this.user = user;
     }
 
     void clearUser() {
-        this.user = null;
+        this.user = new User();
     }
 
-    User getUser() {
+    public  User getUser() {
         return user;
     }
 
