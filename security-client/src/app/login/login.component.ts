@@ -76,9 +76,7 @@ export class LoginComponent implements OnInit {
    }
 
    changePassFormat(): void {
-
     this.passwordFormat = this.passwordFormat === "password" ? "text" : "password";
-
    }
 
 
