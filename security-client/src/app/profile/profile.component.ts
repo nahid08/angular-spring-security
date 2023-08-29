@@ -35,12 +35,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
 
 
-      this.commonService.rxStompService.watch("/topic/greetings").pipe(
-        map(res => JSON.parse(res.body)),
-       
-      ).subscribe(message => {
-         this.commonService.dialogBoxService.open({title: 'Greetings', message: message.content})
-      }) 
+      this.commonService.rxStompService.watch("/topic/greetings").subscribe(message => {
+         this.commonService.dialogBoxService.open({title: 'Greetings', message: JSON.parse(message.body).content})
+      })
     
   }
 
