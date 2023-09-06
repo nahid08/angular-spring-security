@@ -6,6 +6,7 @@ import com.example.security.dto.ConfrimEmailResponse;
 import com.example.security.dto.ForgetPasswordRequestDTO;
 import com.example.security.dto.PasswordChangeRequestDTO;
 import com.example.security.model.ERole;
+import com.example.security.model.Printer;
 import com.example.security.model.Role;
 import com.example.security.model.User;
 import com.example.security.payload.request.LoginRequest;
@@ -74,6 +75,9 @@ public class AuthController {
         ResponseCookie jwtCookie = null;
         List<String> roles = null;
         boolean isLoginFailed = false;
+
+        Printer<Integer> printer = new Printer<>(23);
+
 
        try {
            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));

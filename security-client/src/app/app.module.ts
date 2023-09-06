@@ -17,13 +17,13 @@ import { urlProvider } from './utils/token/config';
 import { ForgetPasswordModule } from './forgetpassword/forgetpassword.module';
 import { ResetPasswordModule } from './resetpassword/resetpassword.module';
 import { ChartModule } from './chart/chart.module';
-import { ProfileModule } from './confirm-user/confirm-user-module';
 import { UserListComponent } from './user-list/user-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { UserListModule } from './user-list/user-list.module';
 import  {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { RxStompService } from './service/rx-stomp.service';
 import { rxStompServiceFactory } from './service/rx-stomp-service-factory';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,8 @@ import { rxStompServiceFactory } from './service/rx-stomp-service-factory';
     ChartModule,
     MatTableModule,
     UserListModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ProfileModule,
 
   ],
   providers: [httpInterceptorsProviders, urlProvider, {provide: RxStompService, useFactory: rxStompServiceFactory}],

@@ -17,4 +17,4 @@ import { ConfirmUserComponent } from "./confirm-user.component";
     ]
 })
 
-export class ProfileModule{};
+export class ConfirmUserModule{};

@@ -24,4 +24,6 @@ public class MessageController {
         Thread.sleep(1000);
         return new Greeting("Hello " + userInfo.getUser().getUsername());
     }
+
+
  }
