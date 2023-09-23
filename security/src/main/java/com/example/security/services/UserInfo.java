@@ -9,7 +9,7 @@ public class UserInfo {
 
     private  User user = new User();
 
-    void setUser(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

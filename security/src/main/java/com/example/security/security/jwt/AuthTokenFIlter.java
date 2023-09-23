@@ -1,6 +1,9 @@
 package com.example.security.security.jwt;
 
+import com.example.security.model.User;
+import com.example.security.repository.UserRepository;
 import com.example.security.services.UserDetailsServiceImpl;
+import com.example.security.services.UserInfo;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +18,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class AuthTokenFIlter extends OncePerRequestFilter {
 
@@ -27,6 +31,12 @@ public class AuthTokenFIlter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
+    @Autowired
+    private UserInfo userInfo;
+
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     protected void doFilterInternal (HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
@@ -38,6 +48,10 @@ public class AuthTokenFIlter extends OncePerRequestFilter {
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
+                Optional<User> user = userRepository.findByUsername(username);
+                if(user.isPresent()) {
+                    userInfo.setUser(user.get());
+                }
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
