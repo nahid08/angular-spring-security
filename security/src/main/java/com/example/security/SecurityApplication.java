@@ -9,7 +9,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class SecurityApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SecurityApplication.class, args);
+
+		SpringApplication application = new SpringApplication(SecurityApplication.class);
+//		application.setBannerMode(Banner.Mode.OFF);
+		application.run((args));
 	}
 
 }
