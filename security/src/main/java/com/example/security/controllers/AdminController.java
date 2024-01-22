@@ -21,7 +21,7 @@ public class AdminController {
 
     @GetMapping("/admin/allusers")
     public UserDetailListResponseDTO getAllUsers() {
-        System.out.println("yes");
+        System.out.println("yes reebase 2");
         UserDetailListResponseDTO response = new UserDetailListResponseDTO();
         List<UserDetail> res =  adminService.findAllUsersDetail();
         response.setUserDetailList(res);
