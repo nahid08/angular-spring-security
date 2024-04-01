@@ -6,14 +6,11 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-import java.util.concurrent.CompletableFuture;
 
 @Service
 public class PdfService {
@@ -42,27 +39,27 @@ public class PdfService {
         document.close();
         byte[] pdfByte = byteArrayOutputStream.toByteArray();
         ByteArrayResource resource = new ByteArrayResource(pdfByte);
-        sendMessage("helloworld");
+//        sendMessage("helloworld");
         return resource;
     }
 
-    public  void sendMessage(String msg) {
-
-        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send("topic", msg);
-        future.whenComplete((result, ex) -> {
-            if(ex == null) {
-                System.out.println("Send Apache Kafka message");
-            } else {
-                System.out.println("Unable to send message");
-            }
-        });
-
-    }
-
-    @KafkaListener(topics = "topic", groupId = "topic")
-    public void listenGroupFoo(String msg) {
-        System.out.println(msg);
-    }
+//    public  void sendMessage(String msg) {
+//
+//        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send("topic", msg);
+//        future.whenComplete((result, ex) -> {
+//            if(ex == null) {
+//                System.out.println("Send Apache Kafka message");
+//            } else {
+//                System.out.println("Unable to send message");
+//            }
+//        });
+//
+//    }
+//
+//    @KafkaListener(topics = "topic", groupId = "topic")
+//    public void listenGroupFoo(String msg) {
+//        System.out.println(msg);
+//    }
 
 
 }
